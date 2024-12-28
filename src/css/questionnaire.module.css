@@ -34,3 +34,59 @@ p {
   font-weight: 200;
   text-decoration: underline;
 }
+
+/* ----------------------------------------------------------------- */
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContent {
+  background-color: var(--primary-element-color-grey);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.modalHeader {
+  color: var(--base-color-brand--gold);
+}
+
+.addButton {
+  background-color: var(--base-color-brand--gold);
+  color: var(--secondary-text-color);
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 0.833rem;
+}
+
+.addButton:hover {
+  background: #be831c;
+}
+
+.closeButton {
+  background: #f44336;
+  color: var(--secondary-text-color);
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 0.833rem;
+}
+
+.closeButton:hover {
+  background: #d32f2f;
+}
