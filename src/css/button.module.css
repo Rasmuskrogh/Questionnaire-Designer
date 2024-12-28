@@ -1,0 +1,8 @@
+.universalButton {
+  padding: 1.25rem 1.95rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  border-radius: 0.813rem;
+  background-color: var(--base-color-brand--gold);
+  border: none;
+}

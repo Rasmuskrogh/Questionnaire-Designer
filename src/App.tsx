@@ -1,7 +1,32 @@
+import { useState } from "react";
+import Button from "./components/Button";
 import classes from "./css/app.module.css";
+import Questionnaire from "./components/Questionnaire";
+import Form from "./components/Form";
 
 function App() {
-  return <></>;
+  const [active, setActive] = useState<boolean>(false); //for testing
+
+  const handleVisibility = () => {
+    setActive((prev) => !prev);
+  };
+
+  return (
+    <div className={classes.wrappingDiv}>
+      <h1>Form Builder</h1>
+      {active ? (
+        <div className={classes.preButtonClickDiv}>
+          <p>Create a form to share with your team or backend system!</p>
+          <Button label="Start Creating" onClick={handleVisibility} />
+        </div>
+      ) : (
+        <div className={classes.postButtonClickDiv}>
+          <Questionnaire />
+          <Form />
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default App;

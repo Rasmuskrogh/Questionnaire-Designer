@@ -1,0 +1,21 @@
+.wrappingDiv {
+  text-align: center;
+  padding: 2rem;
+}
+
+h1 {
+  color: var(--base-color-brand--gold);
+  padding: 2rem 0 1rem 0;
+  font-size: 3.5rem;
+}
+
+p {
+  color: var(--primary-text-color);
+  font-size: 1.125rem;
+  padding-bottom: 2rem;
+}
+
+.postButtonClickDiv {
+  display: flex;
+  justify-content: space-evenly;
+}

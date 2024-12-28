@@ -1,0 +1,36 @@
+.questionnaireWrappingDiv {
+  display: flex;
+  justify-content: flex-start;
+  width: 50%;
+  border: white 1px solid;
+}
+
+.questionnaireHeader {
+  color: var(--primary-text-color);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+label {
+  align-self: flex-start;
+  color: var(--primary-text-color);
+  padding-bottom: 0.5rem;
+  font-size: 28px;
+}
+
+input {
+  margin-bottom: 1rem;
+}
+
+p {
+  align-self: flex-start;
+  color: var(--base-color-brand--gold);
+  padding-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 200;
+  text-decoration: underline;
+}
