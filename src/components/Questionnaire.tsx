@@ -1,12 +1,8 @@
 import { useState } from "react";
 import classes from "../css/questionnaire.module.css";
-import Button from "./Button";
 import InputField from "./InputField";
 import Modal from "./Modal";
-
-type InputType =
-  | { label: string; input: string }
-  | { checkbox: boolean; input: string };
+import { InputType } from "../types";
 
 function Questionnaire() {
   const [inputs, setInputs] = useState<InputType[]>([]);
@@ -24,6 +20,20 @@ function Questionnaire() {
     setShowModal(false);
   };
 
+  const handleAddRadio = (radioData: {
+    question: string;
+    options: string[];
+  }) => {
+    const newRadioInput: InputType = {
+      type: "radio",
+      question: radioData.question,
+      options: radioData.options,
+    };
+
+    setInputs((prevInputs) => [...prevInputs, newRadioInput]);
+    setShowModal(false);
+  };
+
   const handleChange = (
     i: number,
     field: "label" | "input" | "checkbox",
@@ -34,19 +44,48 @@ function Questionnaire() {
     setInputs(newInputs);
   };
 
+  const isRadioInput = (
+    input: InputType
+  ): input is { type: "radio"; question: string; options: string[] } => {
+    return (input as { type: string }).type === "radio";
+  };
+
   return (
     <div className={classes.questionnaireWrappingDiv}>
       <form>
         <label>Choose a title:</label>
         <input type="text" placeholder="Title" />
-        {inputs.map((input, index) => (
-          <InputField
-            key={index}
-            input={input}
-            index={index}
-            onChange={handleChange}
-          />
-        ))}
+
+        {inputs.map((input, i) => {
+          if (isRadioInput(input)) {
+            return (
+              <div key={i}>
+                <h3>{input.question}</h3>
+                {input.options.map((option, index) => (
+                  <div key={index}>
+                    <input
+                      type="radio"
+                      id={`options-${i}-${index}`}
+                      name={`radio-${i}`}
+                    />
+                    <label htmlFor={`option-${i}-${index}`}>{option}</label>
+                  </div>
+                ))}
+              </div>
+            );
+          } else {
+            // Här returnerar du InputField för de andra typerna av input
+            return (
+              <InputField
+                key={i}
+                input={input}
+                index={i}
+                onChange={handleChange}
+              />
+            );
+          }
+        })}
+
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -62,6 +101,7 @@ function Questionnaire() {
           onClose={() => setShowModal(false)}
           onAddInput={handleAddInput}
           onAddCheckbox={handleAddCheckbox}
+          onAddRadio={handleAddRadio}
         />
       )}
     </div>
