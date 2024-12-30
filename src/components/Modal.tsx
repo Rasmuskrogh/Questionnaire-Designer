@@ -5,7 +5,13 @@ import classes from "../css/modal.module.css";
 import { useState } from "react";
 import CreateRadioButtons from "./CreateRadioButtons";
 
-function Modal({ onClose, onAddInput, onAddCheckbox, onAddRadio }: ModalProps) {
+function Modal({
+  onClose,
+  onAddInput,
+  onAddCheckbox,
+  onAddRadio,
+  onAddDate,
+}: ModalProps) {
   const [radioActive, setRadioActive] = useState<boolean>(false);
   const [question, setQuestion] = useState<string>("");
 
@@ -32,6 +38,11 @@ function Modal({ onClose, onAddInput, onAddCheckbox, onAddRadio }: ModalProps) {
             onClick={openRadioModal}
             className={classes.addButton}
             label="Add Radio Buttons"
+          />
+          <Button
+            onClick={onAddDate}
+            className={classes.addButton}
+            label="Add Date"
           />
           <Button
             onClick={onClose}

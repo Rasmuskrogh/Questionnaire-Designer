@@ -2,7 +2,6 @@
   display: flex;
   justify-content: flex-start;
   width: 50%;
-  border: white 1px solid;
 }
 
 .questionnaireHeader {
@@ -34,5 +33,3 @@ p {
   font-weight: 200;
   text-decoration: underline;
 }
-
-/* ----------------------------------------------------------------- */

@@ -34,9 +34,15 @@ function Questionnaire() {
     setShowModal(false);
   };
 
+  const handleAddDate = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setInputs([...inputs, { date: "", input: "" }]);
+    setShowModal(false);
+  };
+
   const handleChange = (
     i: number,
-    field: "label" | "input" | "checkbox",
+    field: "label" | "input" | "checkbox" | "date",
     value: string | boolean
   ) => {
     const newInputs = [...inputs];
@@ -102,6 +108,7 @@ function Questionnaire() {
           onAddInput={handleAddInput}
           onAddCheckbox={handleAddCheckbox}
           onAddRadio={handleAddRadio}
+          onAddDate={handleAddDate}
         />
       )}
     </div>

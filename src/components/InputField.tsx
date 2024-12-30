@@ -2,10 +2,17 @@ import { InputFieldProps } from "../types";
 
 function InputField({ input, index, onChange }: InputFieldProps) {
   const isCheckbox = "checkbox" in input;
+  const isDate = "date" in input;
 
   return (
     <div>
-      {isCheckbox ? (
+      {isDate ? (
+        <input
+          type="date"
+          value={input.input}
+          onChange={(e) => onChange(index, "input", e.target.value)}
+        />
+      ) : isCheckbox ? (
         <input
           type="checkbox"
           checked={input.checkbox === true}
