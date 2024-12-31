@@ -1,4 +1,53 @@
-.test {
-  background-color: black;
-  color: white;
+.form {
+  background-color: var(--primary-element-color-grey);
+  padding: 2rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  min-width: 22rem;
+}
+
+.formLabel {
+  color: var(--base-color-brand--gold);
+  font-size: 2rem;
+  padding-top: 0.3rem;
+}
+
+.formTitle {
+  font-size: 2.5rem;
+  padding-bottom: 1rem;
+}
+
+.formInputs {
+  padding: 0.2rem;
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
+  border: 0;
+  margin-bottom: 0.5rem;
+}
+
+.formDivs {
+  display: flex;
+  flex-direction: column;
+}
+
+.formRadioOptionsDiv,
+.formCheckboxesDiv {
+  align-self: flex-start;
+}
+
+.formCheckboxesLabel,
+.formRadioOptionLabel {
+  font-size: 1.4rem;
+  padding-left: 0.3rem;
+  padding-bottom: 0;
+}
+
+.formCheckboxesDiv > input,
+.formRadioOptionsDiv > input {
+  margin: 0;
+}
+
+.formRadioLabel {
+  padding-bottom: 0;
 }

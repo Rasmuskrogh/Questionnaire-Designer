@@ -13,4 +13,5 @@ export interface RadioButtonSettingsProps {
 
 export interface IForm {
   inputs: InputType[];
+  title: string;
 }

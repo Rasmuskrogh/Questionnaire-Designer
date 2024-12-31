@@ -1,26 +1,28 @@
 import classes from "../css/form.module.css";
 import { IForm } from "../interface";
 
-function Form({ inputs }: IForm) {
+function Form({ inputs, title }: IForm) {
   console.log(inputs);
 
   return (
-    <div className="test">
+    <div className={classes.form}>
+      <h2 className={`${classes.formLabel} ${classes.formTitle}`}>{title}</h2>
       {inputs.map((input, i) => {
-        // Kontrollera om input innehåller ett datum
         if ("date" in input) {
           return (
-            <div key={i}>
-              <label>{input.label}</label>
-              <input type="date" value={input.input} />
+            <div key={i} className={classes.formDivs}>
+              <label className={classes.formLabel}>{input.label}</label>
+              <input className={classes.formInputs} type="date" />
             </div>
           );
         }
         if ("checkbox" in input) {
           return (
-            <div key={i}>
+            <div key={i} className={classes.formCheckboxesDiv}>
               <input type="checkbox" value="false" />
-              <label>{input.input}</label>
+              <label className={classes.formCheckboxesLabel}>
+                {input.input}
+              </label>
             </div>
           );
         }
@@ -31,35 +33,47 @@ function Form({ inputs }: IForm) {
           !("date" in input)
         ) {
           return (
-            <div key={i}>
-              <label>{input.label}</label>
-              <input type="text" value="" placeholder={input.input} />
+            <div key={i} className={classes.formDivs}>
+              <label className={classes.formLabel}>{input.label}</label>
+              <input
+                className={classes.formInputs}
+                type="text"
+                placeholder={input.input}
+              />
             </div>
           );
         }
 
-        if (input.type === "radio") {
-          console.log(Array.isArray(input));
-          return (
-            <div key={i}>
-              <label>{input.question}</label>
-              {input.options.map((option, index) => (
-                <div key={index}>
-                  <input
-                    type="radio"
-                    id={`option-${i}-${index}`}
-                    value={option}
-                    name={`radio-${i}`}
-                  />
-                  <label htmlFor={`option-${i}-${index}`}>{option}</label>
-                </div>
-              ))}
-            </div>
-          );
+        if ("type" in input && input.type === "radio") {
+          if (input.type === "radio") {
+            console.log(Array.isArray(input));
+            return (
+              <div key={i} className={classes.formDivs}>
+                <label
+                  className={`${classes.formLabel} ${classes.formRadioLabel}`}
+                >
+                  {input.question}
+                </label>
+                {input.options.map((option, idx) => (
+                  <div key={idx} className={classes.formRadioOptionsDiv}>
+                    <input
+                      type="radio"
+                      id={`option-${i}-${idx}`}
+                      value={option}
+                      name={`radio-${i}`}
+                    />
+                    <label
+                      className={classes.formRadioOptionLabel}
+                      htmlFor={`option-${i}-${idx}`}
+                    >
+                      {option}
+                    </label>
+                  </div>
+                ))}
+              </div>
+            );
+          }
         }
-
-        // Du kan lägga till hantering för andra inputtyper här om du vill
-        return null;
       })}
     </div>
   );

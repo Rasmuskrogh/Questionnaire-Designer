@@ -8,6 +8,7 @@ import Form from "./Form";
 function Questionnaire() {
   const [inputs, setInputs] = useState<InputType[]>([]);
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [title, setTitle] = useState("");
 
   const handleAddInput = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -37,7 +38,7 @@ function Questionnaire() {
 
   const handleAddDate = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    setInputs([...inputs, { date: "", input: "" }]);
+    setInputs([...inputs, { date: "", input: "", label: "" }]);
     setShowModal(false);
   };
 
@@ -61,7 +62,12 @@ function Questionnaire() {
     <div className={classes.questionnaireWrappingDiv}>
       <form>
         <label>Choose a title:</label>
-        <input type="text" placeholder="Title" />
+        <input
+          type="text"
+          placeholder="Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
 
         {inputs.map((input, i) => {
           if (isRadioInput(input)) {
@@ -101,7 +107,7 @@ function Questionnaire() {
           Add input +
         </button>
       </form>
-      <Form inputs={inputs} />
+      <Form inputs={inputs} title={title} />
 
       {showModal && (
         <Modal

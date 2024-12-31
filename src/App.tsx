@@ -2,7 +2,6 @@ import { useState } from "react";
 import Button from "./components/Button";
 import classes from "./css/app.module.css";
 import Questionnaire from "./components/Questionnaire";
-import Form from "./components/Form";
 
 function App() {
   const [active, setActive] = useState<boolean>(false); //for testing

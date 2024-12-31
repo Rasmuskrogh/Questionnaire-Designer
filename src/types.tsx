@@ -20,4 +20,4 @@ export type InputType =
   | { label: string; input: string }
   | { checkbox: boolean; input: string }
   | { type: "radio"; question: string; options: string[] }
-  | { input: string; date: string };
+  | { input: string; date: string; label: string };
