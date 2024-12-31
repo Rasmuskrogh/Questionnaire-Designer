@@ -3,6 +3,7 @@ import classes from "../css/questionnaire.module.css";
 import InputField from "./InputField";
 import Modal from "./Modal";
 import { InputType } from "../types";
+import Form from "./Form";
 
 function Questionnaire() {
   const [inputs, setInputs] = useState<InputType[]>([]);
@@ -80,7 +81,6 @@ function Questionnaire() {
               </div>
             );
           } else {
-            // Här returnerar du InputField för de andra typerna av input
             return (
               <InputField
                 key={i}
@@ -101,6 +101,7 @@ function Questionnaire() {
           Add input +
         </button>
       </form>
+      <Form inputs={inputs} />
 
       {showModal && (
         <Modal

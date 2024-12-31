@@ -1,7 +1,7 @@
 .questionnaireWrappingDiv {
   display: flex;
-  justify-content: flex-start;
-  width: 50%;
+  justify-content: space-around;
+  width: 100%;
 }
 
 .questionnaireHeader {

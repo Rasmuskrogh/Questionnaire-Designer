@@ -22,7 +22,6 @@ function App() {
       ) : (
         <div className={classes.postButtonClickDiv}>
           <Questionnaire />
-          <Form />
         </div>
       )}
     </div>

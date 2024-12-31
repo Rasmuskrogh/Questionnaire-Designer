@@ -1,3 +1,5 @@
+import { InputType } from "./types";
+
 export interface IButton {
   label: string;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -7,4 +9,8 @@ export interface IButton {
 export interface RadioButtonSettingsProps {
   closeRadio: () => void;
   addRadioGroup: (radioData: { question: string; options: string[] }) => void;
+}
+
+export interface IForm {
+  inputs: InputType[];
 }
