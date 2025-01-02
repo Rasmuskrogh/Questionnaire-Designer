@@ -1,0 +1,34 @@
+.inputWrapper {
+  display: flex;
+  padding: 0.5rem 0;
+}
+
+.inputFieldCheckbox {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.inputFieldInput {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.inputFieldDate {
+  width: 100%;
+}
+
+.textInput {
+  padding: 0.2rem;
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
+  width: 100%;
+}
+
+.textInputCheckbox {
+  font-size: 1rem;
+  border-radius: 0.3rem;
+  border: none;
+  padding: 0.2rem;
+}

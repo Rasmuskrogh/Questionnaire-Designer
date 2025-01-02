@@ -17,7 +17,7 @@ export type ModalProps = {
 };
 
 export type InputType =
-  | { label: string; input: string }
-  | { checkbox: boolean; input: string }
-  | { type: "radio"; question: string; options: string[] }
-  | { input: string; date: string; label: string };
+  | { type: "radio"; question: string; options: string[] } // För radioknappar
+  | { label: string; input: string } // För vanliga textfält
+  | { checkbox: boolean; input: string } // För checkboxar
+  | { date: string; input: string; label: string };

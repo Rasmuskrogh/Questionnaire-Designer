@@ -4,13 +4,17 @@
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
-  min-width: 22rem;
+  min-width: 40%;
+  max-width: 60%;
+  overflow: hidden;
 }
 
 .formLabel {
   color: var(--base-color-brand--gold);
   font-size: 2rem;
   padding-top: 0.3rem;
+  align-self: flex-start;
+  padding-bottom: 1rem;
 }
 
 .formTitle {

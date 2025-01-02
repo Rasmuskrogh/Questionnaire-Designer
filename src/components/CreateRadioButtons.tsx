@@ -7,29 +7,17 @@ const RadioButtonSettings = ({
   closeRadio,
   addRadioGroup,
 }: RadioButtonSettingsProps) => {
-  const [numOptions, setNumOptions] = useState<number>(0);
-  const [optionLabels, setOptionLabels] = useState<string[]>([]);
+  const [numOptions, setNumOptions] = useState<number>(1);
   const [question, setQuestion] = useState<string>("");
 
-  const handleNumOptionsChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newNumOptions = Number(e.target.value);
-    setNumOptions(newNumOptions);
-
-    setOptionLabels((prev) => {
-      const updatedLabels = [...prev];
-      while (updatedLabels.length < newNumOptions) {
-        updatedLabels.push("");
-      }
-      return updatedLabels.slice(0, newNumOptions);
-    });
-  };
-
-  const handleOptionLabelChange = (index: number, value: string) => {
-    setOptionLabels((prev) => {
-      const updatedLabels = [...prev];
-      updatedLabels[index] = value;
-      return updatedLabels;
-    });
+  const handleAddRadioGroup = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const radioData = {
+      question,
+      options: Array(numOptions).fill(""),
+    };
+    addRadioGroup(radioData);
+    closeRadio();
   };
 
   return (
@@ -44,7 +32,10 @@ const RadioButtonSettings = ({
       />
 
       <label>Number of options:</label>
-      <select value={numOptions} onChange={handleNumOptionsChange}>
+      <select
+        value={numOptions}
+        onChange={(e) => setNumOptions(Number(e.target.value))}
+      >
         {[...Array(5).keys()].map((i) => (
           <option key={i} value={i + 1}>
             {i + 1}
@@ -52,28 +43,10 @@ const RadioButtonSettings = ({
         ))}
       </select>
 
-      {[...Array(numOptions)].map((_, index) => (
-        <div key={index}>
-          <label>Option {index + 1}:</label>
-          <input
-            type="text"
-            value={optionLabels[index]}
-            onChange={(e) => handleOptionLabelChange(index, e.target.value)}
-            placeholder={`Option ${index + 1}`}
-          />
-        </div>
-      ))}
       <Button
         label="Add Radio Buttons"
         className={classes.addButton}
-        onClick={(e) => {
-          e.preventDefault();
-          const radioData = {
-            question,
-            options: optionLabels,
-          };
-          addRadioGroup(radioData);
-        }}
+        onClick={handleAddRadioGroup}
       />
       <Button
         label="Cancel"
