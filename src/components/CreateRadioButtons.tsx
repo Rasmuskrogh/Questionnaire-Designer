@@ -1,12 +1,12 @@
 import { useState } from "react";
 import classes from "../css/modal.module.css";
 import Button from "./Button";
-import { RadioButtonSettingsProps } from "../interface";
+import { IRadioButtonSettings } from "../interface";
 
 const RadioButtonSettings = ({
   closeRadio,
   addRadioGroup,
-}: RadioButtonSettingsProps) => {
+}: IRadioButtonSettings) => {
   const [numOptions, setNumOptions] = useState<number>(1);
   const [question, setQuestion] = useState<string>("");
 

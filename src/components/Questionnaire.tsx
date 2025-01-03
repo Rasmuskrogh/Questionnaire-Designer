@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import classes from "../css/questionnaire.module.css";
-import InputField from "./InputField";
 import Modal from "./Modal";
 import { InputType } from "../types";
 import Form from "./Form";
 import Button from "./Button";
 import { saveForm } from "../request";
+import TitleInput from "./TitleInput";
+import InputWrapper from "./InputWrapper";
 
 function Questionnaire() {
   const [inputs, setInputs] = useState<InputType[]>([]);
@@ -76,12 +77,6 @@ function Questionnaire() {
     setInputs(newInputs);
   };
 
-  const isRadioInput = (
-    input: InputType
-  ): input is { type: "radio"; question: string; options: string[] } => {
-    return (input as { type: string }).type === "radio";
-  };
-
   const saveFormToDB = async () => {
     const formData = {
       title,
@@ -90,7 +85,7 @@ function Questionnaire() {
 
     try {
       const result = await saveForm(formData);
-      console.log("form saved successfully");
+      console.log("form saved successfully", result);
     } catch (error) {
       console.error("save form unsuccessful ", error);
     }
@@ -103,82 +98,18 @@ function Questionnaire() {
   return (
     <div className={classes.questionnaireWrappingDiv}>
       <form className={classes.questionnairForm}>
-        <label className={classes.formHeaderLabel}>Choose a form title:</label>
-        <input
-          className={classes.titleInput}
-          type="text"
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-
+        <TitleInput title={title} setTitle={setTitle} />
         {inputs.map((input, i) => (
-          <div key={i} className={classes.inputWrapper}>
-            {isRadioInput(input) ? (
-              <div className={classes.radioWrapper}>
-                <input
-                  className={`${classes.textInputRadioButtons} ${classes.radioButtonsQuestion}`}
-                  type="text"
-                  value={input.question}
-                  onChange={(e) => handleChange(i, "question", e.target.value)}
-                  placeholder="Enter your question"
-                />
-                {input.options.map((option, index) => (
-                  <div key={index} className={classes.radioInnerDiv}>
-                    <input
-                      type="radio"
-                      id={`options-${i}-${index}`}
-                      name={`radio-${i}`}
-                      disabled
-                    />
-                    <input
-                      className={classes.textInputRadioButtons}
-                      type="text"
-                      value={option}
-                      onChange={(e) =>
-                        handleChange(
-                          i,
-                          "options",
-                          input.options.map((opt, optIdx) =>
-                            optIdx === index ? e.target.value : opt
-                          )
-                        )
-                      }
-                      placeholder={`Option ${index + 1}`}
-                    />
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <InputField
-                key={i}
-                input={input}
-                index={i}
-                onChange={handleChange}
-              />
-            )}
-            {inputs.length > 1 ? (
-              <div className={classes.moveButtons}>
-                <div
-                  className={`${classes.moveButtonUp}${
-                    i === 0 ? classes.removed : ""
-                  }`}
-                  onClick={() => arrowUpClicked(i)}
-                ></div>
-                <div
-                  className={`${classes.moveButtonDown} ${
-                    i === inputs.length - 1 ? classes.removed : ""
-                  }`}
-                  onClick={() => arrowDownClicked(i)}
-                ></div>
-              </div>
-            ) : (
-              ""
-            )}
-            <div className={classes.deleteX} onClick={() => deleteInput(i)}>
-              &#10060;
-            </div>
-          </div>
+          <InputWrapper
+            key={i}
+            input={input}
+            index={i}
+            handleChange={handleChange}
+            arrowDownClicked={arrowDownClicked}
+            arrowUpClicked={arrowUpClicked}
+            deleteInput={deleteInput}
+            inputsLength={inputs.length}
+          />
         ))}
 
         <button

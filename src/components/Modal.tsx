@@ -13,7 +13,7 @@ function Modal({
   onAddDate,
 }: ModalProps) {
   const [radioActive, setRadioActive] = useState<boolean>(false);
-  const [question, setQuestion] = useState<string>("");
+ // const [question, setQuestion] = useState<string>("");
 
   const openRadioModal = () => {
     setRadioActive((prev) => !prev);

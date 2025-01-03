@@ -118,3 +118,8 @@
   align-self: center;
   font-size: larger;
 }
+
+.questionnaireTitle {
+  display: flex;
+  flex-direction: column;
+}
