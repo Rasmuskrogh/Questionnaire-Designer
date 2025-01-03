@@ -1,8 +1,11 @@
 import classes from "../css/form.module.css";
 import { IForm } from "../interface";
+import Button from "./Button";
 
 function Form({ inputs, title }: IForm) {
   console.log(inputs);
+
+  const handleSubmit = () => {};
 
   return (
     <div className={classes.form}>
@@ -48,7 +51,7 @@ function Form({ inputs, title }: IForm) {
           if (input.type === "radio") {
             console.log(Array.isArray(input));
             return (
-              <div key={i} className={classes.formDivs}>
+              <form key={i} className={classes.formDivs}>
                 <label
                   className={`${classes.formLabel} ${classes.formRadioLabel}`}
                 >
@@ -70,11 +73,17 @@ function Form({ inputs, title }: IForm) {
                     </label>
                   </div>
                 ))}
-              </div>
+              </form>
             );
           }
         }
       })}
+      <Button
+        label="Submit"
+        onClick={handleSubmit}
+        className={classes.submitButton}
+      />
+      ;
     </div>
   );
 }

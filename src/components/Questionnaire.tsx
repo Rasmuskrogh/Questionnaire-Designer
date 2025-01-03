@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classes from "../css/questionnaire.module.css";
 import InputField from "./InputField";
 import Modal from "./Modal";
 import { InputType } from "../types";
 import Form from "./Form";
 import Button from "./Button";
+import { saveForm } from "../request";
 
 function Questionnaire() {
   const [inputs, setInputs] = useState<InputType[]>([]);
@@ -81,7 +82,23 @@ function Questionnaire() {
     return (input as { type: string }).type === "radio";
   };
 
-  const saveForm = () => {};
+  const saveFormToDB = async () => {
+    const formData = {
+      title,
+      inputs,
+    };
+
+    try {
+      const result = await saveForm(formData);
+      console.log("form saved successfully");
+    } catch (error) {
+      console.error("save form unsuccessful ", error);
+    }
+  };
+
+  useEffect(() => {
+    console.log(inputs);
+  }, []);
 
   return (
     <div className={classes.questionnaireWrappingDiv}>
@@ -176,7 +193,7 @@ function Questionnaire() {
         <Button
           className={classes.saveFormButton}
           label="Save form"
-          onClick={saveForm}
+          onClick={saveFormToDB}
         />
       </form>
       <Form inputs={inputs} title={title} />

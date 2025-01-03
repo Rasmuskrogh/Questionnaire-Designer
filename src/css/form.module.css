@@ -13,7 +13,6 @@
   color: var(--base-color-brand--gold);
   font-size: 2rem;
   padding-top: 0.3rem;
-  align-self: flex-start;
   padding-bottom: 1rem;
 }
 
@@ -45,6 +44,7 @@
   font-size: 1.4rem;
   padding-left: 0.3rem;
   padding-bottom: 0;
+  color: var(--primary-text-color);
 }
 
 .formCheckboxesDiv > input,
@@ -54,4 +54,10 @@
 
 .formRadioLabel {
   padding-bottom: 0;
+  align-self: flex-start;
+}
+
+.submitButton {
+  align-self: center;
+  margin-top: 2rem;
 }
