@@ -4,6 +4,7 @@ import Button from "./Button";
 import classes from "../css/modal.module.css";
 import { useState } from "react";
 import CreateRadioButtons from "./CreateRadioButtons";
+import X from "../assets/x (4).svg";
 
 function Modal({
   onClose,
@@ -13,7 +14,6 @@ function Modal({
   onAddDate,
 }: ModalProps) {
   const [radioActive, setRadioActive] = useState<boolean>(false);
-  // const [question, setQuestion] = useState<string>("");
 
   const openRadioModal = () => {
     setRadioActive((prev) => !prev);
@@ -44,10 +44,11 @@ function Modal({
             className={classes.addButton}
             label="Date"
           />
-          <Button
+          <img
+            src={X}
+            alt="X icon"
             onClick={onClose}
             className={classes.closeButton}
-            label="Cancel"
           />
         </div>
       ) : (

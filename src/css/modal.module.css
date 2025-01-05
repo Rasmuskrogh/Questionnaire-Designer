@@ -16,13 +16,16 @@
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
-  display: flex;
-  flex-direction: column;
+  position: relative;
+  min-width: 20rem;
+  /*   display: flex;
+  flex-direction: column; */
 }
 
 .modalHeader {
   color: var(--base-color-brand--gold);
   padding-bottom: 1rem;
+  text-align: center;
 }
 
 .addButton {
@@ -41,16 +44,21 @@
 }
 
 .closeButton {
-  background: #f44336;
-  color: var(--secondary-text-color);
-  border: none;
-  padding: 10px 20px;
-  margin: 10px;
-  cursor: pointer;
-  border-radius: 4px;
-  font-size: 0.833rem;
+  position: absolute;
+  left: 0.6rem;
+  top: 0.6rem;
 }
 
-.closeButton:hover {
-  background: #d32f2f;
+.radioLabels {
+  color: white;
+}
+
+.radioQuestion {
+  text-align: left;
+}
+
+.radioNumbers {
+  padding: 1rem 0 0.5rem 0;
+
+  text-align: left;
 }
