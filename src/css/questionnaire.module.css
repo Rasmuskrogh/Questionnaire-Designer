@@ -10,6 +10,7 @@
   justify-content: flex-start;
   color: var(--primary-text-color);
   min-width: 30%;
+  gap: 1rem;
 }
 
 .formHeaderLabel {
@@ -35,6 +36,7 @@
   border-radius: 0.5rem;
   border: 0;
   margin-bottom: 0.5rem;
+  width: calc(100% - 1.8rem);
 }
 
 .radioWrapper {
@@ -51,14 +53,15 @@
 }
 
 .textInputRadioButtons {
-  font-size: 1rem;
-  border-radius: 0.3rem;
-  border: none;
   padding: 0.2rem;
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
+  width: calc(100% - 3.6rem);
+  border: none;
 }
 
 .radioButtonsQuestion {
-  width: 14.4rem;
+  width: calc(100% - 1.8rem);
 }
 
 .addInput {
@@ -109,17 +112,24 @@
 }
 
 .moveButtons {
-  align-self: center;
-  margin-left: 0.5rem;
+  align-self: flex-start;
+  margin-right: 0.5rem;
+  padding-top: 0.5rem;
 }
 
 .deleteX {
-  padding-left: 2rem;
-  align-self: center;
+  align-self: flex-start;
   font-size: larger;
+  padding-top: 0.5rem;
 }
 
 .questionnaireTitle {
   display: flex;
   flex-direction: column;
+  margin-left: 1.9rem;
+}
+
+.ifRadioButtonsPadding {
+  padding-top: 1.1rem;
+  border-color: green;
 }

@@ -84,6 +84,9 @@ function Questionnaire() {
     };
 
     try {
+      if (!formData.title) {
+        throw new Error("Title is empty");
+      }
       const result = await saveForm(formData);
       console.log("form saved successfully", result);
     } catch (error) {

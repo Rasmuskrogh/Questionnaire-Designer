@@ -13,7 +13,7 @@ function Modal({
   onAddDate,
 }: ModalProps) {
   const [radioActive, setRadioActive] = useState<boolean>(false);
- // const [question, setQuestion] = useState<string>("");
+  // const [question, setQuestion] = useState<string>("");
 
   const openRadioModal = () => {
     setRadioActive((prev) => !prev);
@@ -27,22 +27,22 @@ function Modal({
           <Button
             onClick={onAddInput}
             className={classes.addButton}
-            label="Add Input"
+            label="Input"
           />
           <Button
             onClick={onAddCheckbox}
             className={classes.addButton}
-            label="Add Checkbox"
+            label="Checkbox"
           />
           <Button
             onClick={openRadioModal}
             className={classes.addButton}
-            label="Add Radio Buttons"
+            label="Radio Buttons"
           />
           <Button
             onClick={onAddDate}
             className={classes.addButton}
-            label="Add Date"
+            label="Date"
           />
           <Button
             onClick={onClose}

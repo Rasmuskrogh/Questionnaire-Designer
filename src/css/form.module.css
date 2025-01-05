@@ -14,11 +14,13 @@
   font-size: 2rem;
   padding-top: 0.3rem;
   padding-bottom: 1rem;
+  text-align: left;
 }
 
 .formTitle {
   font-size: 2.5rem;
   padding-bottom: 1rem;
+  color: var(--base-color-brand--gold);
 }
 
 .formInputs {

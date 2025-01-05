@@ -9,7 +9,7 @@ function Form({ inputs, title }: IForm) {
 
   return (
     <div className={classes.form}>
-      <h2 className={`${classes.formLabel} ${classes.formTitle}`}>{title}</h2>
+      <h2 className={classes.formTitle}>{title}</h2>
       {inputs.map((input, i) => {
         if ("date" in input) {
           return (

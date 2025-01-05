@@ -20,7 +20,7 @@ function InputField({ input, index, onChange }: InputFieldProps) {
             type="text"
             value={input.input || ""}
             onChange={(e) => onChange(index, "input", e.target.value)}
-            placeholder="Enter input for checkbox"
+            placeholder="Enter checkbox value"
           />
         </div>
       )}
@@ -32,7 +32,7 @@ function InputField({ input, index, onChange }: InputFieldProps) {
             type="text"
             value={input.label || ""}
             onChange={(e) => onChange(index, "label", e.target.value)}
-            placeholder="Label for date"
+            placeholder="Enter date label"
           />
         </div>
       )}
@@ -44,7 +44,7 @@ function InputField({ input, index, onChange }: InputFieldProps) {
             type="text"
             value={input.label || ""}
             onChange={(e) => onChange(index, "label", e.target.value)}
-            placeholder="Label text"
+            placeholder="Enter label"
           />
           <input
             className={classes.textInput}

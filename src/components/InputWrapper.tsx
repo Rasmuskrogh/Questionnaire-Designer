@@ -3,6 +3,7 @@ import { InputType } from "../types";
 import InputField from "./InputField";
 import classes from "../css/questionnaire.module.css";
 import { IInputWrapper } from "../interface";
+import Trashcan from "../assets/trash-2 (1).svg";
 
 const InputWrapper: React.FC<IInputWrapper> = ({
   input,
@@ -19,8 +20,33 @@ const InputWrapper: React.FC<IInputWrapper> = ({
     return (input as { type: string }).type === "radio";
   };
 
+  const isRadio = isRadioInput(input);
+
   return (
     <div className={classes.inputWrapper}>
+      <div className={classes.deleteX} onClick={() => deleteInput(index)}>
+        <img src={Trashcan} alt="trashcan" />
+      </div>
+      <div
+        className={`${classes.moveButtons} ${
+          isRadio && index === inputsLength - 1
+            ? classes.ifRadioButtonsPadding
+            : ""
+        }`}
+      >
+        <div
+          className={`${classes.moveButtonUp} ${
+            index === 0 ? classes.removed : ""
+          }`}
+          onClick={() => arrowUpClicked(index)}
+        ></div>
+        <div
+          className={`${classes.moveButtonDown} ${
+            index === inputsLength - 1 ? classes.removed : ""
+          }`}
+          onClick={() => arrowDownClicked(index)}
+        ></div>
+      </div>
       {isRadioInput(input) ? (
         <div className={classes.radioWrapper}>
           <input
@@ -59,23 +85,6 @@ const InputWrapper: React.FC<IInputWrapper> = ({
       ) : (
         <InputField input={input} index={index} onChange={handleChange} />
       )}
-      <div className={classes.moveButtons}>
-        <div
-          className={`${classes.moveButtonUp} ${
-            index === 0 ? classes.removed : ""
-          }`}
-          onClick={() => arrowUpClicked(index)}
-        ></div>
-        <div
-          className={`${classes.moveButtonDown} ${
-            index === inputsLength - 1 ? classes.removed : ""
-          }`}
-          onClick={() => arrowDownClicked(index)}
-        ></div>
-      </div>
-      <div className={classes.deleteX} onClick={() => deleteInput(index)}>
-        &#10060;
-      </div>
     </div>
   );
 };
