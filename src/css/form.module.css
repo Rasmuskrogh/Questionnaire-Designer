@@ -36,6 +36,10 @@
   flex-direction: column;
 }
 
+.formCheckboxesDiv {
+  padding-top: 0.6rem;
+}
+
 .formRadioOptionsDiv,
 .formCheckboxesDiv {
   align-self: flex-start;

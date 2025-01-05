@@ -1,3 +1,32 @@
 {
-  "forms": []
+  "forms": [
+    {
+      "id": "f390",
+      "title": "Title",
+      "inputs": [
+        {
+          "label": "A question",
+          "input": "Please write an answer"
+        },
+        {
+          "type": "radio",
+          "question": "What's your preference?",
+          "options": [
+            "This one",
+            "That one ",
+            "The other one"
+          ]
+        },
+        {
+          "date": "",
+          "input": "",
+          "label": "What's todays date?"
+        },
+        {
+          "checkbox": false,
+          "input": "I agree"
+        }
+      ]
+    }
+  ]
 }

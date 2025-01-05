@@ -4,7 +4,7 @@ import Modal from "./Modal";
 import { InputType } from "../types";
 import Form from "./Form";
 import Button from "./Button";
-import { saveForm } from "../request";
+import { getPrefilledForm, saveForm } from "../request";
 import TitleInput from "./TitleInput";
 import InputWrapper from "./InputWrapper";
 
@@ -94,42 +94,66 @@ function Questionnaire() {
     }
   };
 
+  const clearForm = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setTitle("");
+    setInputs([]);
+  };
+
   useEffect(() => {
-    console.log(inputs);
+    const fetchPrefilledForm = async () => {
+      try {
+        const formData = await getPrefilledForm();
+        setTitle(formData.title);
+        setInputs(formData.inputs);
+      } catch (error) {
+        console.error("Error loading initial from data", error);
+      }
+    };
+    fetchPrefilledForm();
   }, []);
 
   return (
     <div className={classes.questionnaireWrappingDiv}>
-      <form className={classes.questionnairForm}>
-        <TitleInput title={title} setTitle={setTitle} />
-        {inputs.map((input, i) => (
-          <InputWrapper
-            key={i}
-            input={input}
-            index={i}
-            handleChange={handleChange}
-            arrowDownClicked={arrowDownClicked}
-            arrowUpClicked={arrowUpClicked}
-            deleteInput={deleteInput}
-            inputsLength={inputs.length}
-          />
-        ))}
+      <div>
+        <form className={classes.questionnairForm}>
+          <TitleInput title={title} setTitle={setTitle} />
+          {inputs.map((input, i) => (
+            <InputWrapper
+              key={i}
+              input={input}
+              index={i}
+              handleChange={handleChange}
+              arrowDownClicked={arrowDownClicked}
+              arrowUpClicked={arrowUpClicked}
+              deleteInput={deleteInput}
+              inputsLength={inputs.length}
+            />
+          ))}
 
-        <button
-          className={classes.addInput}
-          onClick={(e) => {
-            e.preventDefault();
-            setShowModal(true);
-          }}
-        >
-          Add input +
-        </button>
-        <Button
-          className={classes.saveFormButton}
-          label="Save form"
-          onClick={saveFormToDB}
-        />
-      </form>
+          <button
+            className={classes.addInput}
+            onClick={(e) => {
+              e.preventDefault();
+              setShowModal(true);
+            }}
+          >
+            Add input +
+          </button>
+          <div>
+            <Button
+              className={classes.saveFormButton}
+              label="Save form"
+              onClick={saveFormToDB}
+            />
+            <Button
+              className={classes.clearFormButton}
+              label="Clear form"
+              onClick={clearForm}
+            />
+          </div>
+        </form>
+      </div>
       <Form inputs={inputs} title={title} />
 
       {showModal && (

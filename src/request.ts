@@ -19,3 +19,17 @@ export const saveForm = async (form: { title: string; inputs: any[] }) => {
     throw error;
   }
 };
+
+export const getPrefilledForm = async () => {
+  try {
+    const response = await fetch("http://localhost:5000/forms/f390");
+    if (!response.ok) {
+      throw new Error("Failed to load initial form data");
+    }
+    const formData = await response.json();
+    return formData;
+  } catch (error) {
+    console.error("Error fetching form data", error);
+    throw error;
+  }
+};

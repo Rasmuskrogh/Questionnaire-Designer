@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-around;
   width: 100%;
+  align-items: flex-start;
 }
 
 .questionnairForm {
@@ -19,16 +20,6 @@
   padding-bottom: 0.5rem;
   font-size: 28px;
 }
-
-/* p {
-  align-self: flex-start;
-  color: var(--base-color-brand--gold);
-  padding-bottom: 1rem;
-  font-size: 1.5rem;
-  font-weight: 200;
-  text-decoration: underline;
-}
- */
 
 .titleInput {
   padding: 0.2rem;
@@ -75,6 +66,13 @@
 
 .saveFormButton {
   align-self: center;
+  margin-right: 0.5rem;
+}
+
+.clearFormButton {
+  margin-left: 0.5rem;
+  background-color: darkred;
+  color: white;
 }
 
 .removed {

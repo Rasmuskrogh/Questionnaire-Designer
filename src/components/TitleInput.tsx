@@ -4,7 +4,7 @@ import { ITitleInput } from "../interface";
 function TitleInput({ title, setTitle }: ITitleInput) {
   return (
     <div className={classes.questionnaireTitle}>
-      <label className={classes.formHeaderLabel}>Choose a form title:</label>
+      <label className={classes.formHeaderLabel}>Choose a title:</label>
       <input
         className={classes.titleInput}
         type="text"
