@@ -9,6 +9,7 @@ The form can be saved in the db.json file and a initial template will be loaded 
 You are able to rearange inputs and delete them at will.
 
 I have made the project in Vite, "a blazing fast frontend build tool powering the next generation of web applications", because of its speed and simplicity of configuration.
+
 I have used CSS modules for styling because it gives me more control of the styling and prevents styles from bleeding over to other components.
 
 ## Installation
@@ -18,7 +19,7 @@ Clone the repository and open in a code editor.
 Run the following commands:
 
 ```javascript
-# installs the dependencies and node modules for the project
+# installs dependencies and node modules
 npm i
 
 # starts the development server on port 5173
