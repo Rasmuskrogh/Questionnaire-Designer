@@ -1,50 +1,30 @@
-# React + TypeScript + Vite
+# Questionnaire Designer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a team collaboration platform. The platform allows team leaders to create custom questionnaires to send out to new members.
 
-Currently, two official plugins are available:
+## Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+I my form a team leader could name the form, add inputs such as checkboxes, radio buttons, input fields and date fields. Most inpouts have labels and they will be updated in real time while you write them.
+The form can be saved in the db.json file and a initial template will be loaded for you when the project reloads.
+You are able to rearange inputs and delete them at will.
 
-## Expanding the ESLint configuration
+I have made the project in Vite, "a blazing fast frontend build tool powering the next generation of web applications", because of its speed and simplicity of configuration.
+I have used CSS modules for styling because it gives me more control of the styling and prevents styles from bleeding over to other components.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Installation
 
-- Configure the top-level `parserOptions` property like this:
+Clone the repository and open in a code editor.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+Run the following commands:
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+```javascript
+# installs the dependencies and node modules for the project
+npm i
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+# starts the development server on port 5173
+npm run dev
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+# starts the json-server on port 5000
+json-server --watch db.json --port 5000
+
 ```

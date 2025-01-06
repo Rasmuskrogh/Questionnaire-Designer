@@ -25,7 +25,7 @@ const InputWrapper: React.FC<IInputWrapper> = ({
   return (
     <div className={classes.inputWrapper}>
       <div className={classes.deleteX} onClick={() => deleteInput(index)}>
-        <img src={Trashcan} alt="trashcan" />
+        <img className={classes.trashcan} src={Trashcan} alt="trashcan" />
       </div>
       <div
         className={`${classes.moveButtons} ${

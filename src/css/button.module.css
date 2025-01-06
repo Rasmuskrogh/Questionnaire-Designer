@@ -6,3 +6,8 @@
   background-color: var(--base-color-brand--gold);
   border: none;
 }
+
+.universalButton:hover {
+  background: #be831c;
+  cursor: pointer;
+}

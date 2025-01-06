@@ -64,6 +64,13 @@
   font-size: 1.2rem;
 }
 
+.addInput:hover {
+  font-size: 1.3rem;
+  margin-bottom: 2.8rem;
+  color: #8d6217;
+  cursor: pointer;
+}
+
 .saveFormButton {
   align-self: center;
   margin-right: 0.5rem;
@@ -73,6 +80,10 @@
   margin-left: 0.5rem;
   background-color: darkred;
   color: white;
+}
+
+.clearFormButton:hover {
+  background-color: rgb(161, 16, 45);
 }
 
 .removed {
@@ -120,6 +131,11 @@
   font-size: larger;
   padding-top: 0.5rem;
   padding-right: 0.5rem;
+}
+
+.trashcan:hover {
+  cursor: pointer;
+  stroke: yellow;
 }
 
 .questionnaireTitle {

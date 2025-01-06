@@ -44,14 +44,14 @@ function InputField({ input, index, onChange }: InputFieldProps) {
             type="text"
             value={input.label || ""}
             onChange={(e) => onChange(index, "label", e.target.value)}
-            placeholder="Enter label"
+            placeholder="Enter a question"
           />
           <input
             className={classes.textInput}
             type="text"
             value={input.input || ""}
             onChange={(e) => onChange(index, "input", e.target.value)}
-            placeholder="Enter placeholder"
+            placeholder="Placeholder answer"
           />
         </div>
       )}
