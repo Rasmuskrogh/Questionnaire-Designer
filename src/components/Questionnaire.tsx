@@ -7,6 +7,7 @@ import Button from "./Button";
 import { getPrefilledForm, saveForm } from "../request";
 import TitleInput from "./TitleInput";
 import InputWrapper from "./InputWrapper";
+import SkeletonQuestionnaire from "../Skeletons/SkeletonQuestionnaire";
 
 function Questionnaire() {
   const [inputs, setInputs] = useState<InputType[]>([]);
@@ -116,43 +117,47 @@ function Questionnaire() {
   return (
     <div className={classes.questionnaireWrappingDiv}>
       <div>
-        <form className={classes.questionnairForm}>
-          <TitleInput title={title} setTitle={setTitle} />
-          {inputs.map((input, i) => (
-            <InputWrapper
-              key={i}
-              input={input}
-              index={i}
-              handleChange={handleChange}
-              arrowDownClicked={arrowDownClicked}
-              arrowUpClicked={arrowUpClicked}
-              deleteInput={deleteInput}
-              inputsLength={inputs.length}
-            />
-          ))}
+        {inputs && title ? (
+          <form className={classes.questionnairForm}>
+            <TitleInput title={title} setTitle={setTitle} />
+            {inputs.map((input, i) => (
+              <InputWrapper
+                key={i}
+                input={input}
+                index={i}
+                handleChange={handleChange}
+                arrowDownClicked={arrowDownClicked}
+                arrowUpClicked={arrowUpClicked}
+                deleteInput={deleteInput}
+                inputsLength={inputs.length}
+              />
+            ))}
 
-          <button
-            className={classes.addInput}
-            onClick={(e) => {
-              e.preventDefault();
-              setShowModal(true);
-            }}
-          >
-            Add input +
-          </button>
-          <div>
-            <Button
-              className={classes.saveFormButton}
-              label="Save form"
-              onClick={saveFormToDB}
-            />
-            <Button
-              className={classes.clearFormButton}
-              label="Clear form"
-              onClick={clearForm}
-            />
-          </div>
-        </form>
+            <button
+              className={classes.addInput}
+              onClick={(e) => {
+                e.preventDefault();
+                setShowModal(true);
+              }}
+            >
+              Add input +
+            </button>
+            <div>
+              <Button
+                className={classes.saveFormButton}
+                label="Save form"
+                onClick={saveFormToDB}
+              />
+              <Button
+                className={classes.clearFormButton}
+                label="Clear form"
+                onClick={clearForm}
+              />
+            </div>
+          </form>
+        ) : (
+          <SkeletonQuestionnaire />
+        )}
       </div>
       <Form inputs={inputs} title={title} />
 

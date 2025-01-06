@@ -1,0 +1,135 @@
+.skeletonForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  color: var(--primary-text-color);
+  min-width: 30%;
+  gap: 0.5rem;
+  animation: pulse 1.5s infinite alternate;
+}
+
+.skeletonHeaderLabel {
+  align-self: flex-start;
+  color: var(--primary-text-color);
+  padding-bottom: 0rem;
+  font-size: 28px;
+}
+
+.skeletonInputsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-bottom: 1.2rem;
+}
+
+.skeletonHeaderInput,
+.skeletonInputs {
+  height: 2.46rem;
+  width: 100%;
+  background-color: #d1d1d1;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.skeletonRadioText,
+.skeletonText {
+  height: 1.5rem;
+  width: 80%;
+  background-color: rgba(0, 0, 0, 0.6);
+  margin-left: 0.4rem;
+  line-height: 1.4;
+  border-radius: 1rem;
+}
+
+.skeletonHeaderInput {
+  margin-bottom: 1.2rem;
+}
+
+.skeletonRadioWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-bottom: 1.2rem;
+}
+
+.skeletonRadioDiv {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.skeletonAddInput {
+  align-self: flex-start;
+  color: var(--base-color-brand--gold);
+  font-size: 1.2rem;
+  font-family: "Alata", serif;
+  font-weight: 400;
+  font-style: normal;
+  padding-top: 2rem;
+  padding-bottom: 3.2rem;
+}
+
+.saveFormButton {
+  align-self: center;
+  margin-right: 0.5rem;
+}
+
+.clearFormButton {
+  margin-left: 0.5rem;
+  background-color: darkred;
+  color: white;
+}
+
+.clearFormButton:hover {
+  background-color: rgb(161, 16, 45);
+}
+
+/* Form */
+
+.skeletonformWrapper {
+  display: flex;
+  flex-direction: column;
+  animation: pulse 1.5s infinite alternate;
+}
+
+.skeletonTitle {
+  height: 3.5rem;
+  width: 10rem;
+  margin-bottom: 3rem;
+  background-color: var(--base-color-brand--gold);
+  align-self: center;
+  border-radius: 2rem;
+}
+
+.skeletonFormLabel,
+.skeletonFormRadioLabel {
+  height: 2.8rem;
+  width: 15rem;
+  margin-bottom: 1.5rem;
+  background-color: var(--base-color-brand--gold);
+  border-radius: 2rem;
+}
+
+.skeletonFormRadioLabel {
+  margin-bottom: 0.5rem;
+}
+
+.skeletonRadioText {
+  background-color: #d1d1d1;
+  width: 50%;
+  margin-bottom: 0.2rem;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 100%;
+  }
+
+  50% {
+    opacity: 100%;
+  }
+
+  100% {
+    opacity: 0%;
+  }
+}
