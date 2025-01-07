@@ -30,7 +30,8 @@ h1 {
 label,
 input,
 h2,
-button {
+button,
+p {
   font-family: "Alata", serif;
   font-weight: 400;
   font-style: normal;

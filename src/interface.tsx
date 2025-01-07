@@ -19,6 +19,7 @@ export interface IForm {
   inputs: InputType[];
   title: string;
   isLoading: boolean;
+  validationEnabled: boolean;
 }
 
 export interface ITitleInput {

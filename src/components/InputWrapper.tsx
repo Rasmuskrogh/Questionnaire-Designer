@@ -53,7 +53,7 @@ const InputWrapper: React.FC<IInputWrapper> = ({
           onClick={() => arrowDownClicked(index)}
         ></div>
       </div>
-      {isRadioInput(input) ? (
+      {isRadioInput(input) || isCheckboxInput(input) ? (
         <div className={classes.radioWrapper}>
           <input
             className={`${classes.textInputRadioButtons} ${classes.radioButtonsQuestion}`}
@@ -64,47 +64,21 @@ const InputWrapper: React.FC<IInputWrapper> = ({
           />
           {input.options.map((option, i) => (
             <div key={i} className={classes.radioInnerDiv}>
-              <input
-                type="radio"
-                id={`options-${index}-${i}`}
-                name={`radio-${index}`}
-                disabled
-              />
-              <input
-                className={classes.textInputRadioButtons}
-                type="text"
-                value={option}
-                onChange={(e) =>
-                  handleChange(
-                    index,
-                    "options",
-                    input.options.map((opt, optIdx) =>
-                      optIdx === i ? e.target.value : opt
-                    )
-                  )
-                }
-                placeholder={`Option ${i + 1}`}
-              />
-            </div>
-          ))}
-        </div>
-      ) : isCheckboxInput(input) ? (
-        <div className={classes.radioWrapper}>
-          <input
-            className={`${classes.textInputRadioButtons} ${classes.radioButtonsQuestion}`}
-            type="text"
-            value={input.question}
-            onChange={(e) => handleChange(index, "question", e.target.value)}
-            placeholder="Enter your question"
-          />
-          {input.options.map((option, i) => (
-            <div key={i} className={classes.radioInnerDiv}>
-              <input
-                type="checkbox"
-                id={`options-${index}-${i}`}
-                name={`checkbox-${index}`}
-                disabled
-              />
+              {isRadioInput(input) ? (
+                <input
+                  type="radio"
+                  id={`options-${index}-${i}`}
+                  name={`radio-${index}`}
+                  disabled
+                />
+              ) : (
+                <input
+                  type="checkbox"
+                  id={`options-${index}-${i}`}
+                  name={`checkbox-${index}`}
+                  disabled
+                />
+              )}
               <input
                 className={classes.textInputRadioButtons}
                 type="text"

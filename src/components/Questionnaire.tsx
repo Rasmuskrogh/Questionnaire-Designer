@@ -14,6 +14,7 @@ function Questionnaire() {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [validationEnabled, setValidationEnabled] = useState<boolean>(false)
 
   const handleAddInput = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -109,6 +110,7 @@ function Questionnaire() {
     setTitle("");
     setInputs([]);
   };
+  
 
   useEffect(() => {
     const fetchPrefilledForm = async () => {
@@ -142,6 +144,10 @@ function Questionnaire() {
               inputsLength={inputs.length}
             />
           ))}
+          <div className={classes.valdationCheck}>
+            <input type="checkbox" id="validationCheck" checked={validationEnabled} onChange={(e) => setValidationEnabled(e.target.checked)}/>
+            <label htmlFor="validationCheck">Enable validation</label>
+          </div>
 
           <button
             className={classes.addInput}
@@ -169,7 +175,7 @@ function Questionnaire() {
         <SkeletonQuestionnaire />
       )}
 
-      <Form inputs={inputs} title={title} isLoading={isLoading} />
+      <Form inputs={inputs} title={title} isLoading={isLoading} validationEnabled={validationEnabled} />
 
       {showModal && (
         <Modal

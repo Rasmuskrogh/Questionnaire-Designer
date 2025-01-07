@@ -43,6 +43,7 @@
 .formRadioOptionsDiv,
 .formCheckboxesDiv {
   align-self: flex-start;
+  display: flex;
 }
 
 .formCheckboxesLabel,
@@ -66,6 +67,72 @@
 .submitButton {
   align-self: center;
   margin-top: 2rem;
+}
+
+.invalidInput {
+  border: crimson 2px solid;
+  background-color: rgb(250, 185, 177);
+}
+
+.invalidField {
+  color: crimson;
+}
+
+/* .aligningRadioDiv {
+  align-self: center;
+}
+
+.radioButtonsDiv {
+  display: flex;
+}
+
+.radio {
+  position: relative;
+  z-index: 1;
+}
+
+.invalidRadio {
+  border: crimson 1px solid;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  height: 13px;
+  background-color: crimson;
+  position: relative;
+  z-index: 2;
+  background: salmon;
+} */
+
+.aligningRadioDiv {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.radio {
+  appearance: none; /* Dölj standardknapp */
+  width: 16px;
+  height: 16px;
+  border: 2px solid gray; /* Standardborder */
+  border-radius: 50%; /* Rund form */
+  /* outline: none; */ /* Ta bort fokusglow */
+  background-color: white; /* Standardbakgrund */
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  z-index: 10;
+}
+
+.radio:checked {
+  background-color: lightgreen; /* Markerad bakgrund */
+  border-color: green; /* Markerad border */
+}
+
+.invalidRadio {
+  border-color: crimson; /* Röd border vid valideringsfel */
+  background-color: pink; /* Bakgrund vid valideringsfel */
+}
+
+.radioLabel {
+  cursor: pointer;
 }
 
 @media (width < 835px) {
