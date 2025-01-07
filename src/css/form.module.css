@@ -78,30 +78,6 @@
   color: crimson;
 }
 
-/* .aligningRadioDiv {
-  align-self: center;
-}
-
-.radioButtonsDiv {
-  display: flex;
-}
-
-.radio {
-  position: relative;
-  z-index: 1;
-}
-
-.invalidRadio {
-  border: crimson 1px solid;
-  border-radius: 50%;
-  aspect-ratio: 1 / 1;
-  height: 13px;
-  background-color: crimson;
-  position: relative;
-  z-index: 2;
-  background: salmon;
-} */
-
 .aligningRadioDiv {
   display: flex;
   align-items: center;
@@ -109,26 +85,26 @@
 }
 
 .radio {
-  appearance: none; /* Dölj standardknapp */
+  appearance: none;
   width: 16px;
   height: 16px;
-  border: 2px solid gray; /* Standardborder */
-  border-radius: 50%; /* Rund form */
-  /* outline: none; */ /* Ta bort fokusglow */
-  background-color: white; /* Standardbakgrund */
+  border: 2px solid gray;
+  border-radius: 50%;
+  outline: none;
+  background-color: white;
   cursor: pointer;
   transition: border-color 0.3s ease, background-color 0.3s ease;
   z-index: 10;
 }
 
 .radio:checked {
-  background-color: lightgreen; /* Markerad bakgrund */
-  border-color: green; /* Markerad border */
+  background-color: #0075ff;
+  border: white solid 2px;
 }
 
 .invalidRadio {
-  border-color: crimson; /* Röd border vid valideringsfel */
-  background-color: pink; /* Bakgrund vid valideringsfel */
+  border-color: crimson;
+  background-color: pink;
 }
 
 .radioLabel {

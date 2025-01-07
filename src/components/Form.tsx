@@ -2,91 +2,106 @@ import classes from "../css/form.module.css";
 import { IForm } from "../interface";
 import SkeletonForm from "../Skeletons/SkeletonForm";
 import Button from "./Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Form({ inputs, title, isLoading, validationEnabled }: IForm) {
-  // Initialisera formInputs baserat på inputs
-  const [formInputs, setFormInputs] = useState(
+  const [formInputs, setFormInputs] = useState<{ input: string | boolean }[]>(
     inputs.map((input) => {
-      if ("input" in input) {
-        return { input: "" }; // För textinput
-      }
-      if ("date" in input) {
-        return { input: "" }; // För datuminput
-      }
       if ("options" in input) {
-        return { input: "" }; // För radio/checkbox
+        return { input: "" };
       }
-      return { input: "" }; // Standardvärde
+      return { input: "" };
     })
   );
+
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
-  // Funktion för att validera formuläret
   const validateForm = () => {
-    if (validationEnabled) {
-      const newErrors: { [key: string]: string } = {};
+    const newErrors: { [key: string]: string } = {};
 
-      inputs.forEach((input, i) => {
-        // Validering för datum
-        if ("date" in input && !formInputs[i]?.input) {
-          newErrors[i] = "Please select a valid date.";
-        }
+    inputs.forEach((input, i) => {
+      console.log(`Checking input ${i}:`, formInputs[i]?.input); // Loggar värdet för varje fält
 
-        // Validering för textinput
-        if ("input" in input && !formInputs[i]?.input) {
-          newErrors[i] = "This field is required.";
-        }
+      if ("date" in input && !formInputs[i]?.input) {
+        newErrors[i] = "Vänligen välj ett giltigt datum.";
+      }
 
-        // Validering för checkbox
-        if (
-          "type" in input &&
-          input.type === "checkbox" &&
-          !formInputs[i]?.input
-        ) {
-          newErrors[i] = "Please select an option.";
-        }
+      if (
+        "input" in input &&
+        typeof formInputs[i]?.input === "string" &&
+        !formInputs[i]?.input.trim()
+      ) {
+        newErrors[i] = "Detta fält är obligatoriskt.";
+      }
 
-        // Validering för radio
-        if (
-          "type" in input &&
-          input.type === "radio" &&
-          !formInputs[i]?.input
-        ) {
-          newErrors[i] = "Please select a radio option.";
-        }
-      });
+      if (
+        "type" in input &&
+        input.type === "checkbox" &&
+        !formInputs[i]?.input // Ingen checkbox har valts
+      ) {
+        newErrors[i] = "Vänligen välj åtminstone ett alternativ.";
+      }
 
-      setErrors(newErrors);
-      return Object.keys(newErrors).length === 0; // Om inga fel hittas
-    }
+      if (
+        "type" in input &&
+        input.type === "radio" &&
+        !formInputs[i]?.input // Ingen radioknapp har valts
+      ) {
+        newErrors[i] = "Vänligen välj ett radioknappsalternativ.";
+      }
+    });
+
+    console.log("Validation errors:", newErrors); // Loggar alla valideringsfel
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (validationEnabled) {
-      if (validateForm()) {
-        console.log("Form is valid", formInputs);
-        setErrors({});
-      } else {
-        console.log("Form is invalid");
-      }
+
+    if (validationEnabled && validateForm()) {
+      setErrors({});
     }
   };
 
-  const handleInputChange = (index: number, value: string) => {
+  const handleInputChange = (index: number, value: string | boolean) => {
     setFormInputs((prev) => {
-      if (prev[index]) {
-        // Kolla att elementet existerar innan du ändrar det
-        const newInputs = [...prev];
-        newInputs[index].input = value; // Uppdatera det specifika fältet
-        return newInputs;
+      const newInputs = [...prev];
+
+      // Kolla om objektet har 'type'
+      if ("type" in inputs[index]) {
+        if (
+          inputs[index].type === "checkbox" ||
+          inputs[index].type === "radio"
+        ) {
+          newInputs[index].input = value;
+        }
       } else {
-        console.error(`Index ${index} is out of bounds in formInputs.`);
-        return prev; // Returnera oförändrad array om index inte är giltigt
+        // För de andra typerna, sätt värdet som en string
+        newInputs[index].input = value as string;
       }
+
+      return newInputs;
     });
   };
+
+  // Initiera formInputs med tomma strängar eller rätt typ vid första laddningen
+  useEffect(() => {
+    const initialInputs = inputs.map((input) => {
+      if ("type" in input) {
+        // Kollar om objektet har 'type' innan vi försöker komma åt den
+        if (input.type === "checkbox" || input.type === "radio") {
+          return { input: "" }; // Starta med tomt värde för checkbox och radio
+        }
+      }
+
+      // För andra fält (text, datum) sätt tomt värde
+      return { input: "" };
+    });
+
+    setFormInputs(initialInputs);
+  }, [inputs]);
 
   return (
     <div className={classes.form}>
