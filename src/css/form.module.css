@@ -67,3 +67,12 @@
   align-self: center;
   margin-top: 2rem;
 }
+
+@media (width < 835px) {
+  .form {
+    align-self: center;
+    width: 100%;
+    max-width: 40rem;
+    min-width: none;
+  }
+}

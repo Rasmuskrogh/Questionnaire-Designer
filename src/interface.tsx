@@ -14,6 +14,7 @@ export interface IRadioButtonSettings {
 export interface IForm {
   inputs: InputType[];
   title: string;
+  isLoading: boolean;
 }
 
 export interface ITitleInput {

@@ -12,7 +12,8 @@ import SkeletonQuestionnaire from "../Skeletons/SkeletonQuestionnaire";
 function Questionnaire() {
   const [inputs, setInputs] = useState<InputType[]>([]);
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const handleAddInput = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -78,7 +79,8 @@ function Questionnaire() {
     setInputs(newInputs);
   };
 
-  const saveFormToDB = async () => {
+  const saveFormToDB = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     const formData = {
       title,
       inputs,
@@ -108,7 +110,9 @@ function Questionnaire() {
         setTitle(formData.title);
         setInputs(formData.inputs);
       } catch (error) {
-        console.error("Error loading initial from data", error);
+        console.error("Error loading initial form data", error);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchPrefilledForm();
@@ -116,50 +120,49 @@ function Questionnaire() {
 
   return (
     <div className={classes.questionnaireWrappingDiv}>
-      <div>
-        {inputs && title ? (
-          <form className={classes.questionnairForm}>
-            <TitleInput title={title} setTitle={setTitle} />
-            {inputs.map((input, i) => (
-              <InputWrapper
-                key={i}
-                input={input}
-                index={i}
-                handleChange={handleChange}
-                arrowDownClicked={arrowDownClicked}
-                arrowUpClicked={arrowUpClicked}
-                deleteInput={deleteInput}
-                inputsLength={inputs.length}
-              />
-            ))}
+      {!isLoading ? (
+        <form className={classes.questionnairForm}>
+          <TitleInput title={title} setTitle={setTitle} />
+          {inputs.map((input, i) => (
+            <InputWrapper
+              key={i}
+              input={input}
+              index={i}
+              handleChange={handleChange}
+              arrowDownClicked={arrowDownClicked}
+              arrowUpClicked={arrowUpClicked}
+              deleteInput={deleteInput}
+              inputsLength={inputs.length}
+            />
+          ))}
 
-            <button
-              className={classes.addInput}
-              onClick={(e) => {
-                e.preventDefault();
-                setShowModal(true);
-              }}
-            >
-              Add input +
-            </button>
-            <div>
-              <Button
-                className={classes.saveFormButton}
-                label="Save form"
-                onClick={saveFormToDB}
-              />
-              <Button
-                className={classes.clearFormButton}
-                label="Clear form"
-                onClick={clearForm}
-              />
-            </div>
-          </form>
-        ) : (
-          <SkeletonQuestionnaire />
-        )}
-      </div>
-      <Form inputs={inputs} title={title} />
+          <button
+            className={classes.addInput}
+            onClick={(e) => {
+              e.preventDefault();
+              setShowModal(true);
+            }}
+          >
+            Add input +
+          </button>
+          <div className={classes.ButtonWrapperQuestionnaire}>
+            <Button
+              className={classes.saveFormButton}
+              label="Save form"
+              onClick={saveFormToDB}
+            />
+            <Button
+              className={classes.clearFormButton}
+              label="Clear form"
+              onClick={clearForm}
+            />
+          </div>
+        </form>
+      ) : (
+        <SkeletonQuestionnaire />
+      )}
+
+      <Form inputs={inputs} title={title} isLoading={isLoading} />
 
       {showModal && (
         <Modal

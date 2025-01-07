@@ -3,6 +3,7 @@
   justify-content: space-around;
   width: 100%;
   align-items: flex-start;
+  animation: fadeIn 2s;
 }
 
 .questionnairForm {
@@ -142,4 +143,61 @@
   display: flex;
   flex-direction: column;
   margin-left: 1.9rem;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0%;
+  }
+
+  25% {
+    opacity: 0%;
+  }
+
+  100% {
+    opacity: 1000%;
+  }
+}
+
+@media (width < 835px) {
+  .questionnaireWrappingDiv {
+    flex-direction: column;
+    gap: 3rem;
+  }
+  .questionnairForm {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .questionnaireTitle {
+    padding-left: 2rem;
+    width: 100%;
+  }
+  .inputWrapper {
+    width: calc(100% - 1.8rem);
+  }
+
+  .textInputRadioButtons {
+    width: 100%;
+  }
+  .radioWrapper {
+    width: 100%;
+  }
+  .radioInnerDiv {
+    width: 100%;
+  }
+}
+
+@media (width < 513px) {
+  .addInput {
+    margin: 0 0 0.5rem 0;
+  }
+  .ButtonWrapperQuestionnaire {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+@media (width < 470px) {
 }

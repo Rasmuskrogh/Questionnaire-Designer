@@ -3,7 +3,7 @@ import { IForm } from "../interface";
 import SkeletonForm from "../Skeletons/SkeletonForm";
 import Button from "./Button";
 
-function Form({ inputs, title }: IForm) {
+function Form({ inputs, title, isLoading }: IForm) {
   console.log(inputs);
 
   const handleSubmit = () => {
@@ -12,7 +12,7 @@ function Form({ inputs, title }: IForm) {
 
   return (
     <div className={classes.form}>
-      {inputs && title ? (
+      {!isLoading ? (
         <>
           <h2 className={classes.formTitle}>{title}</h2>
           {inputs.map((input, i) => {
