@@ -21,9 +21,16 @@ function Questionnaire() {
     setShowModal(false);
   };
 
-  const handleAddCheckbox = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setInputs([...inputs, { checkbox: false, input: "" }]);
+  const handleAddCheckbox = (checkboxData: {
+    question: string;
+    options: string[];
+  }) => {
+    const newChecboxInput: InputType = {
+      type: "checkbox",
+      question: checkboxData.question,
+      options: checkboxData.options,
+    };
+    setInputs((prevInputs) => [...prevInputs, newChecboxInput]);
     setShowModal(false);
   };
 

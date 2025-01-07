@@ -19,8 +19,14 @@ const InputWrapper: React.FC<IInputWrapper> = ({
   ): input is { type: "radio"; question: string; options: string[] } => {
     return (input as { type: string }).type === "radio";
   };
+  const isCheckboxInput = (
+    input: InputType
+  ): input is { type: "checkbox"; question: string; options: string[] } => {
+    return (input as { type: string }).type === "checkbox";
+  };
 
   const isRadio = isRadioInput(input);
+  const isCheckbox = isCheckboxInput(input);
 
   return (
     <div className={classes.inputWrapper}>
@@ -29,7 +35,7 @@ const InputWrapper: React.FC<IInputWrapper> = ({
       </div>
       <div
         className={`${classes.moveButtons} ${
-          isRadio && index === inputsLength - 1
+          (isRadio || isCheckbox) && index === inputsLength - 1
             ? classes.ifRadioButtonsPadding
             : ""
         }`}
@@ -62,6 +68,41 @@ const InputWrapper: React.FC<IInputWrapper> = ({
                 type="radio"
                 id={`options-${index}-${i}`}
                 name={`radio-${index}`}
+                disabled
+              />
+              <input
+                className={classes.textInputRadioButtons}
+                type="text"
+                value={option}
+                onChange={(e) =>
+                  handleChange(
+                    index,
+                    "options",
+                    input.options.map((opt, optIdx) =>
+                      optIdx === i ? e.target.value : opt
+                    )
+                  )
+                }
+                placeholder={`Option ${i + 1}`}
+              />
+            </div>
+          ))}
+        </div>
+      ) : isCheckboxInput(input) ? (
+        <div className={classes.radioWrapper}>
+          <input
+            className={`${classes.textInputRadioButtons} ${classes.radioButtonsQuestion}`}
+            type="text"
+            value={input.question}
+            onChange={(e) => handleChange(index, "question", e.target.value)}
+            placeholder="Enter your question"
+          />
+          {input.options.map((option, i) => (
+            <div key={i} className={classes.radioInnerDiv}>
+              <input
+                type="checkbox"
+                id={`options-${index}-${i}`}
+                name={`checkbox-${index}`}
                 disabled
               />
               <input

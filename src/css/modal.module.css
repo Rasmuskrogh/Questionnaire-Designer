@@ -51,6 +51,13 @@
 
 .radioLabels {
   color: white;
+  padding-right: 0.2rem;
+}
+
+.radioSelect,
+.radioInputs {
+  border-radius: 0.2rem;
+  border: none;
 }
 
 .radioQuestion {
@@ -61,4 +68,21 @@
   padding: 1rem 0 0.5rem 0;
 
   text-align: left;
+}
+
+@media (width < 835px) {
+  .modalContent {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (width < 400px) {
+  .modalContent {
+    width: 280px;
+    min-width: 0;
+  }
+  .modalHeader {
+    padding-top: 1rem;
+  }
 }

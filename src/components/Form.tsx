@@ -25,17 +25,6 @@ function Form({ inputs, title, isLoading }: IForm) {
               );
             }
 
-            if ("checkbox" in input) {
-              return (
-                <div key={i} className={classes.formCheckboxesDiv}>
-                  <input type="checkbox" />
-                  <label className={classes.formCheckboxesLabel}>
-                    {input.input}
-                  </label>
-                </div>
-              );
-            }
-
             if (
               "input" in input &&
               !("checkbox" in input) &&
@@ -51,6 +40,34 @@ function Form({ inputs, title, isLoading }: IForm) {
                     placeholder={input.input}
                   />
                 </div>
+              );
+            }
+
+            if ("type" in input && input.type === "checkbox") {
+              return (
+                <form key={i} className={classes.formDivs}>
+                  <label
+                    className={`${classes.formLabel} ${classes.formRadioLabel}`}
+                  >
+                    {input.question}
+                  </label>
+                  {input.options?.map((option, idx) => (
+                    <div key={idx} className={classes.formRadioOptionsDiv}>
+                      <input
+                        type="checkbox"
+                        id={`option-${i}-${idx}`}
+                        value={option}
+                        name={`checkbox-${i}`}
+                      />
+                      <label
+                        className={classes.formRadioOptionLabel}
+                        htmlFor={`option-${i}-${idx}`}
+                      >
+                        {option}
+                      </label>
+                    </div>
+                  ))}
+                </form>
               );
             }
 

@@ -3,7 +3,7 @@ import Button from "./Button";
 
 import classes from "../css/modal.module.css";
 import { useState } from "react";
-import CreateRadioButtons from "./CreateRadioButtons";
+import CreateSelectableInputs from "./CreateSelectableInputs";
 import X from "../assets/x (4).svg";
 
 function Modal({
@@ -13,15 +13,26 @@ function Modal({
   onAddRadio,
   onAddDate,
 }: ModalProps) {
-  const [radioActive, setRadioActive] = useState<boolean>(false);
+  const [selectableActive, setSelectableActive] = useState<boolean>(false);
+  const [selector, setSelector] = useState<string>("");
 
-  const openRadioModal = () => {
-    setRadioActive((prev) => !prev);
+  const openSelectableModal = () => {
+    setSelectableActive((prev) => !prev);
   };
+
+  const handleCheckboxClick = () => {
+    setSelector("checkbox");
+    openSelectableModal();
+  };
+
+  const handleRadioClick = () => {
+    setSelector("radio");
+    openSelectableModal();
+  }
 
   return (
     <div className={classes.modal}>
-      {!radioActive ? (
+      {!selectableActive ? (
         <div className={classes.modalContent}>
           <h2 className={classes.modalHeader}>Add Input</h2>
           <Button
@@ -30,12 +41,12 @@ function Modal({
             label="Input"
           />
           <Button
-            onClick={onAddCheckbox}
+            onClick={handleCheckboxClick}
             className={classes.addButton}
             label="Checkbox"
           />
           <Button
-            onClick={openRadioModal}
+            onClick={handleRadioClick}
             className={classes.addButton}
             label="Radio Buttons"
           />
@@ -53,11 +64,12 @@ function Modal({
         </div>
       ) : (
         <div className={classes.modalContent}>
-          <CreateRadioButtons
-            closeRadio={openRadioModal}
-            addRadioGroup={(radioData) => {
-              onAddRadio(radioData);
-              setRadioActive(false);
+          <CreateSelectableInputs
+            selectablesType = {selector}
+            closeSelectableModal={openSelectableModal}
+            addSelectableGroup={(selectablesData) => {{selector === "radio" ? (onAddRadio(selectablesData)) : (onAddCheckbox(selectablesData))}
+              
+              setSelectableActive(false);
             }}
           />
         </div>
