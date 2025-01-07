@@ -6,14 +6,19 @@ export interface IButton {
   className?: string;
 }
 
-export interface IRadioButtonSettings {
-  closeRadio: () => void;
-  addRadioGroup: (radioData: { question: string; options: string[] }) => void;
+export interface ISelectableSettings {
+  closeSelectableModal: () => void;
+  addSelectableGroup: (selectableData: {
+    question: string;
+    options: string[];
+  }) => void;
+  selectablesType: string;
 }
 
 export interface IForm {
   inputs: InputType[];
   title: string;
+  isLoading: boolean;
 }
 
 export interface ITitleInput {

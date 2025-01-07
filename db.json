@@ -11,11 +11,7 @@
         {
           "type": "radio",
           "question": "What's your preference?",
-          "options": [
-            "This one",
-            "That one ",
-            "The other one"
-          ]
+          "options": ["This one", "That one ", "The other one"]
         },
         {
           "date": "",
@@ -23,8 +19,9 @@
           "label": "What's todays date?"
         },
         {
-          "checkbox": false,
-          "input": "I agree"
+          "type": "checkbox",
+          "question": "Do you agree?",
+          "options": ["Without a doubt!"]
         }
       ]
     }

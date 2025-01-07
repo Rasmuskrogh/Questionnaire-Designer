@@ -3,7 +3,7 @@ import { IForm } from "../interface";
 import SkeletonForm from "../Skeletons/SkeletonForm";
 import Button from "./Button";
 
-function Form({ inputs, title }: IForm) {
+function Form({ inputs, title, isLoading }: IForm) {
   console.log(inputs);
 
   const handleSubmit = () => {
@@ -12,7 +12,7 @@ function Form({ inputs, title }: IForm) {
 
   return (
     <div className={classes.form}>
-      {inputs && title ? (
+      {!isLoading ? (
         <>
           <h2 className={classes.formTitle}>{title}</h2>
           {inputs.map((input, i) => {
@@ -21,17 +21,6 @@ function Form({ inputs, title }: IForm) {
                 <div key={i} className={classes.formDivs}>
                   <label className={classes.formLabel}>{input.label}</label>
                   <input className={classes.formInputs} type="date" />
-                </div>
-              );
-            }
-
-            if ("checkbox" in input) {
-              return (
-                <div key={i} className={classes.formCheckboxesDiv}>
-                  <input type="checkbox" />
-                  <label className={classes.formCheckboxesLabel}>
-                    {input.input}
-                  </label>
                 </div>
               );
             }
@@ -51,6 +40,34 @@ function Form({ inputs, title }: IForm) {
                     placeholder={input.input}
                   />
                 </div>
+              );
+            }
+
+            if ("type" in input && input.type === "checkbox") {
+              return (
+                <form key={i} className={classes.formDivs}>
+                  <label
+                    className={`${classes.formLabel} ${classes.formRadioLabel}`}
+                  >
+                    {input.question}
+                  </label>
+                  {input.options?.map((option, idx) => (
+                    <div key={idx} className={classes.formRadioOptionsDiv}>
+                      <input
+                        type="checkbox"
+                        id={`option-${i}-${idx}`}
+                        value={option}
+                        name={`checkbox-${i}`}
+                      />
+                      <label
+                        className={classes.formRadioOptionLabel}
+                        htmlFor={`option-${i}-${idx}`}
+                      >
+                        {option}
+                      </label>
+                    </div>
+                  ))}
+                </form>
               );
             }
 

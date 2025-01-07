@@ -4,7 +4,7 @@ import classes from "./css/app.module.css";
 import Questionnaire from "./components/Questionnaire";
 
 function App() {
-  const [active, setActive] = useState<boolean>(false); //for testing
+  const [active, setActive] = useState<boolean>(true); //for testing
 
   const handleVisibility = () => {
     setActive((prev) => !prev);

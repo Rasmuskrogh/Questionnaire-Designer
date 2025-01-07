@@ -34,3 +34,15 @@
   width: calc(100% - 3.6rem);
   border: none;
 }
+
+@media (width < 835px) {
+  .inputWrapper {
+    width: 100%;
+  }
+  .textInputCheckbox {
+    width: 100%;
+  }
+  .inputFieldCheckbox {
+    width: 100%;
+  }
+}
