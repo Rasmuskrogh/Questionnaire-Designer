@@ -39,4 +39,14 @@ export interface IInputWrapper {
   arrowDownClicked: (i: number) => void;
   deleteInput: (i: number) => void;
   inputsLength: number;
+  addOption: (
+    i: number,
+    newOption: string,
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => void;
+  removeOption: (
+    OptionI: number,
+    inputI: number,
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => void;
 }
