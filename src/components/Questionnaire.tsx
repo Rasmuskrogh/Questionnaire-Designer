@@ -49,6 +49,41 @@ function Questionnaire() {
     setShowModal(false);
   };
 
+  const addRadioCheckboxOption = (
+    i: number,
+    newOption: string,
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    e.preventDefault();
+    const newInputs = [...inputs];
+    if (
+      newInputs[i] &&
+      "options" in newInputs[i] &&
+      Array.isArray(newInputs[i].options)
+    ) {
+      newInputs[i].options.push(newOption);
+      setInputs(newInputs);
+    }
+  };
+
+  const removeRadioCheckboxOption = (
+    optionI: number,
+    inputI: number,
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    e.preventDefault();
+    const updatedInputs = [...inputs];
+
+    if (
+      updatedInputs[inputI] &&
+      "options" in updatedInputs[inputI] &&
+      Array.isArray(updatedInputs[inputI].options)
+    ) {
+      updatedInputs[inputI].options.splice(optionI, 1);
+      setInputs(updatedInputs);
+    }
+  };
+
   const handleAddDate = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setInputs([...inputs, { date: "", input: "", label: "" }]);
@@ -141,6 +176,8 @@ function Questionnaire() {
               arrowUpClicked={arrowUpClicked}
               deleteInput={deleteInput}
               inputsLength={inputs.length}
+              addOption={addRadioCheckboxOption}
+              removeOption={removeRadioCheckboxOption}
             />
           ))}
           <div className={classes.addInputAndValidation}>

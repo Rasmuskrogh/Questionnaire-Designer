@@ -4,6 +4,7 @@ import InputField from "./InputField";
 import classes from "../css/questionnaire.module.css";
 import { IInputWrapper } from "../interface";
 import Trashcan from "../assets/trash-2 (1).svg";
+import Plus from "../assets/plus (1).svg";
 
 const InputWrapper: React.FC<IInputWrapper> = ({
   input,
@@ -13,6 +14,8 @@ const InputWrapper: React.FC<IInputWrapper> = ({
   arrowDownClicked,
   deleteInput,
   inputsLength,
+  addOption,
+  removeOption,
 }) => {
   const isRadioInput = (
     input: InputType
@@ -55,17 +58,26 @@ const InputWrapper: React.FC<IInputWrapper> = ({
       </div>
       {isRadioInput(input) || isCheckboxInput(input) ? (
         <div className={classes.radioWrapper}>
-          <input
-            className={`${classes.textInputRadioButtons} ${classes.radioButtonsQuestion}`}
-            type="text"
-            value={input.question}
-            onChange={(e) => handleChange(index, "question", e.target.value)}
-            placeholder="Enter your question"
-          />
+          <div className={classes.radioQuestionWrapper}>
+            <input
+              className={`${classes.textInputRadioButtons} ${classes.radioButtonsQuestion}`}
+              type="text"
+              value={input.question}
+              onChange={(e) => handleChange(index, "question", e.target.value)}
+              placeholder="Enter your question"
+            />
+            <button
+              className={classes.addOptionButton}
+              onClick={(e) => addOption(index, "", e)}
+            >
+              <img className={classes.addPlus} src={Plus} alt="plus icon" />
+            </button>
+          </div>
           {input.options.map((option, i) => (
             <div key={i} className={classes.radioInnerDiv}>
               {isRadioInput(input) ? (
                 <input
+                  className={classes.resetPadding}
                   type="radio"
                   id={`options-${index}-${i}`}
                   name={`radio-${index}`}
@@ -80,7 +92,7 @@ const InputWrapper: React.FC<IInputWrapper> = ({
                 />
               )}
               <input
-                className={classes.textInputRadioButtons}
+                className={`${classes.textInputRadioButtons} ${classes.setMargin} `}
                 type="text"
                 value={option}
                 onChange={(e) =>
@@ -94,6 +106,18 @@ const InputWrapper: React.FC<IInputWrapper> = ({
                 }
                 placeholder={`Option ${i + 1}`}
               />
+              {input.options.length > 1 && (
+                <button
+                  className={classes.deleteOption}
+                  onClick={(e) => removeOption(i, index, e)}
+                >
+                  <img
+                    className={classes.optionsTrashcan}
+                    src={Trashcan}
+                    alt="trashcan"
+                  />
+                </button>
+              )}
             </div>
           ))}
         </div>
