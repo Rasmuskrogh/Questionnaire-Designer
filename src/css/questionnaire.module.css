@@ -19,7 +19,7 @@
   align-self: flex-start;
   color: var(--primary-text-color);
   padding-bottom: 0.5rem;
-  font-size: 28px;
+  font-size: 1.75rem;
 }
 
 .titleInput {
@@ -57,7 +57,6 @@
 }
 
 .addInput {
-  margin-bottom: 3rem;
   border: none;
   background: transparent;
   color: var(--base-color-brand--gold);
@@ -119,6 +118,7 @@
 
 .inputWrapper {
   display: flex;
+  width: calc(100% - 1.8rem);
 }
 
 .moveButtons {
@@ -149,6 +149,23 @@
   align-self: flex-start;
   display: flex;
   gap: 0.2rem;
+  padding-top: 0.3rem;
+}
+
+.addInputAndValidation {
+  padding-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.textInputRadioButtons {
+  width: 100%;
+}
+.radioWrapper {
+  width: 100%;
+}
+.radioInnerDiv {
+  width: 100%;
 }
 
 @keyframes fadeIn {
@@ -179,7 +196,7 @@
     padding-left: 2rem;
     width: 100%;
   }
-  .inputWrapper {
+  /* .inputWrapper {
     width: calc(100% - 1.8rem);
   }
 
@@ -191,12 +208,12 @@
   }
   .radioInnerDiv {
     width: 100%;
-  }
+  } */
 }
 
 @media (width < 513px) {
-  .addInput {
-    margin: 0 0 0.5rem 0;
+  .addInputAndValidation {
+    width: 100%;
   }
   .ButtonWrapperQuestionnaire {
     display: flex;
@@ -206,4 +223,13 @@
 }
 
 @media (width < 470px) {
+  .formHeaderLabel {
+    font-size: 1.5rem;
+  }
+  .titleInput {
+    font-size: 1.2rem;
+  }
+  .textInputRadioButtons {
+    font-size: 1.2rem;
+  }
 }

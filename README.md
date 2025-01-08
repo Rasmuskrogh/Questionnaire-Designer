@@ -4,9 +4,9 @@ This is a team collaboration platform. The platform allows team leaders to creat
 
 ## Description
 
-I my form a team leader could name the form, add inputs such as checkboxes, radio buttons, input fields and date fields. Most inpouts have labels and they will be updated in real time while you write them.
+In my application a team leader could name the form, add inputs such as checkboxes, radio buttons, input fields and date fields. Most inpouts have labels and they will be updated in real time while you write them.
 The form can be saved in the db.json file and a initial template will be loaded for you when the project reloads.
-You are able to rearange inputs and delete them at will.
+You are able to rearange inputs and delete them at will. This will also be updated on the form in realtime.
 
 I have made the project in Vite, "a blazing fast frontend build tool powering the next generation of web applications", because of its speed and simplicity of configuration.
 

@@ -11,3 +11,9 @@
   background: #be831c;
   cursor: pointer;
 }
+
+@media (width < 380px) {
+  .universalButton {
+    padding: 0.8rem 1rem;
+  }
+}

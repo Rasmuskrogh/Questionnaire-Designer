@@ -35,7 +35,17 @@
   border: none;
 }
 
-@media (width < 835px) {
+.inputWrapper {
+  width: 100%;
+}
+.textInputCheckbox {
+  width: 100%;
+}
+.inputFieldCheckbox {
+  width: 100%;
+}
+
+/* @media (width < 835px) {
   .inputWrapper {
     width: 100%;
   }
@@ -44,5 +54,11 @@
   }
   .inputFieldCheckbox {
     width: 100%;
+  }
+} */
+
+@media (width < 470px) {
+  .textInput {
+    font-size: 1.2rem;
   }
 }

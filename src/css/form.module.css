@@ -119,3 +119,38 @@
     min-width: none;
   }
 }
+
+@media (width < 470px) {
+  .formTitle {
+    font-size: 2rem;
+  }
+  .formLabel {
+    font-size: 1.5rem;
+  }
+  .formInputs {
+    font-size: 1.2rem;
+  }
+  .formRadioOptionLabel {
+    font-size: 1rem;
+  }
+  .radio {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+@media (width < 350px) {
+  .formLabel {
+    font-size: 1.2rem;
+  }
+  .formInputs {
+    font-size: 1rem;
+  }
+  .formRadioOptionLabel {
+    font-size: 0.8rem;
+  }
+  .submitButton {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.8rem;
+  }
+}
