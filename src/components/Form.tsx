@@ -1,31 +1,54 @@
+import { useState, useEffect } from "react";
 import classes from "../css/form.module.css";
-import { IForm } from "../interface";
 import SkeletonForm from "../Skeletons/SkeletonForm";
+import { IForm } from "../interface";
 import Button from "./Button";
-import { useEffect, useState } from "react";
+import { InputType } from "../types";
 
 function Form({ inputs, title, isLoading, validationEnabled }: IForm) {
   const [formInputs, setFormInputs] = useState<{ input: string | boolean }[]>(
-    inputs.map((input) => {
-      if ("options" in input) {
-        return { input: "" };
-      }
-      return { input: "" };
-    })
+    []
   );
-
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+  const [initialInputsState, setInitialInputsState] = useState<InputType[]>([]);
+
+  // Typguards för att kontrollera olika inputtyper
+  const isRadio = (
+    input: InputType
+  ): input is { type: "radio"; question: string; options: string[] } => {
+    return (input as { type: "radio" }).type === "radio";
+  };
+
+  const isCheckbox = (
+    input: InputType
+  ): input is { type: "checkbox"; question: string; options: string[] } => {
+    return (input as { type: "checkbox" }).type === "checkbox";
+  };
+
+  const isTextInput = (
+    input: InputType
+  ): input is { label: string; input: string } => {
+    return (input as { label: string; input: string }).input !== undefined;
+  };
+
+  const isDateInput = (
+    input: InputType
+  ): input is { date: string; input: string; label: string } => {
+    return (input as { date: string }).date !== undefined;
+  };
 
   const validateForm = () => {
+    if (!validationEnabled) return true;
+
     const newErrors: { [key: string]: string } = {};
 
     inputs.forEach((input, i) => {
-      console.log(`Checking input ${i}:`, formInputs[i]?.input); // Loggar värdet för varje fält
-
-      if ("date" in input && !formInputs[i]?.input) {
+      if (isDateInput(input) && !formInputs[i]?.input) {
         newErrors[i] = "Vänligen välj ett giltigt datum.";
       }
 
+      // Behåller den ursprungliga lösningen för att undvika trim-fel
       if (
         "input" in input &&
         typeof formInputs[i]?.input === "string" &&
@@ -34,24 +57,10 @@ function Form({ inputs, title, isLoading, validationEnabled }: IForm) {
         newErrors[i] = "Detta fält är obligatoriskt.";
       }
 
-      if (
-        "type" in input &&
-        input.type === "checkbox" &&
-        !formInputs[i]?.input // Ingen checkbox har valts
-      ) {
-        newErrors[i] = "Vänligen välj åtminstone ett alternativ.";
-      }
-
-      if (
-        "type" in input &&
-        input.type === "radio" &&
-        !formInputs[i]?.input // Ingen radioknapp har valts
-      ) {
-        newErrors[i] = "Vänligen välj ett radioknappsalternativ.";
+      if ((isRadio(input) || isCheckbox(input)) && !formInputs[i]?.input) {
+        newErrors[i] = "Vänligen välj ett alternativ.";
       }
     });
-
-    console.log("Validation errors:", newErrors); // Loggar alla valideringsfel
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -59,48 +68,54 @@ function Form({ inputs, title, isLoading, validationEnabled }: IForm) {
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    setIsSubmitted(true);
 
     if (validationEnabled && validateForm()) {
       setErrors({});
+      // Handle form submission logic here
     }
   };
 
   const handleInputChange = (index: number, value: string | boolean) => {
     setFormInputs((prev) => {
       const newInputs = [...prev];
-
-      // Kolla om objektet har 'type'
-      if ("type" in inputs[index]) {
-        if (
-          inputs[index].type === "checkbox" ||
-          inputs[index].type === "radio"
-        ) {
-          newInputs[index].input = value;
-        }
-      } else {
-        // För de andra typerna, sätt värdet som en string
-        newInputs[index].input = value as string;
-      }
-
+      newInputs[index].input = value;
       return newInputs;
     });
   };
 
-  // Initiera formInputs med tomma strängar eller rätt typ vid första laddningen
   useEffect(() => {
-    const initialInputs = inputs.map((input) => {
-      if ("type" in input) {
-        // Kollar om objektet har 'type' innan vi försöker komma åt den
-        if (input.type === "checkbox" || input.type === "radio") {
-          return { input: "" }; // Starta med tomt värde för checkbox och radio
+    const shouldUpdateState =
+      inputs.length !== initialInputsState.length ||
+      inputs.some((input, i) => {
+        if (
+          (isRadio(input) || isCheckbox(input)) &&
+          (isRadio(initialInputsState[i]) || isCheckbox(initialInputsState[i]))
+        ) {
+          return input.options.length !== initialInputsState[i].options.length;
         }
-      }
+        return false;
+      }) ||
+      !inputs.every((input, i) => {
+        return JSON.stringify(input) === JSON.stringify(initialInputsState[i]);
+      });
 
-      // För andra fält (text, datum) sätt tomt värde
-      return { input: "" };
-    });
-
-    setFormInputs(initialInputs);
+    if (shouldUpdateState) {
+      const inputsCopy = [...inputs];
+      setInitialInputsState(inputsCopy);
+      setFormInputs(
+        inputsCopy.map((input) => {
+          if (isTextInput(input)) {
+            return { input: input.input || "" };
+          } else if (isRadio(input) || isCheckbox(input)) {
+            return { input: "" }; // För radioknappar och checkboxar, sätt standardvärde
+          } else if (isDateInput(input)) {
+            return { input: "" }; // För datumfält, sätt standardvärde
+          }
+          return { input: "" };
+        })
+      );
+    }
   }, [inputs]);
 
   return (
@@ -109,83 +124,45 @@ function Form({ inputs, title, isLoading, validationEnabled }: IForm) {
         <>
           <h2 className={classes.formTitle}>{title}</h2>
           {inputs.map((input, i) => {
-            if ("date" in input) {
+            const showError = isSubmitted && errors[i];
+            if (isDateInput(input)) {
               return (
                 <div key={i} className={classes.formDivs}>
                   <label className={classes.formLabel}>{input.label}</label>
                   <input
                     className={`${classes.formInputs} ${
-                      errors[i] ? classes.invalidInput : ""
+                      showError ? classes.invalidInput : ""
                     }`}
                     type="date"
                     onChange={(e) => handleInputChange(i, e.target.value)}
                   />
-                  {errors[i] && (
+                  {showError && (
                     <p className={classes.invalidField}>{errors[i]}</p>
                   )}
                 </div>
               );
             }
 
-            if (
-              "input" in input &&
-              !("checkbox" in input) &&
-              !("radio" in input) &&
-              !("date" in input)
-            ) {
+            if (isTextInput(input)) {
               return (
                 <div key={i} className={classes.formDivs}>
                   <label className={classes.formLabel}>{input.label}</label>
                   <input
                     className={`${classes.formInputs} ${
-                      errors[i] ? classes.invalidInput : ""
+                      showError ? classes.invalidInput : ""
                     }`}
                     type="text"
                     placeholder={input.input}
                     onChange={(e) => handleInputChange(i, e.target.value)}
                   />
-                  {errors[i] && (
+                  {showError && (
                     <p className={classes.invalidField}>{errors[i]}</p>
                   )}
                 </div>
               );
             }
 
-            if ("type" in input && input.type === "checkbox") {
-              return (
-                <div key={i} className={classes.formDivs}>
-                  <label
-                    className={`${classes.formLabel} ${classes.formRadioLabel}`}
-                  >
-                    {input.question}
-                  </label>
-                  {input.options?.map((option, idx) => (
-                    <div key={idx} className={classes.formRadioOptionsDiv}>
-                      <input
-                        type="checkbox"
-                        id={`option-${i}-${idx}`}
-                        value={option}
-                        name={`checkbox-${i}`}
-                        onChange={(e) =>
-                          handleInputChange(i, e.target.checked ? option : "")
-                        }
-                      />
-                      <label
-                        className={classes.formRadioOptionLabel}
-                        htmlFor={`option-${i}-${idx}`}
-                      >
-                        {option}
-                      </label>
-                    </div>
-                  ))}
-                  {errors[i] && (
-                    <p className={classes.invalidField}>{errors[i]}</p>
-                  )}
-                </div>
-              );
-            }
-
-            if ("type" in input && input.type === "radio") {
+            if (isRadio(input) || isCheckbox(input)) {
               return (
                 <div key={i} className={classes.formDivs}>
                   <label
@@ -198,10 +175,10 @@ function Form({ inputs, title, isLoading, validationEnabled }: IForm) {
                       <div className={classes.aligningRadioDiv}>
                         <input
                           className={`${classes.radio} ${
-                            errors[i] ? classes.invalidRadio : ""
+                            showError ? classes.invalidRadio : ""
                           }`}
                           type="radio"
-                          id={`option-${i}-${idx}`}
+                          id={`radio-${i}-${idx}`}
                           value={option}
                           name={`radio-${i}`}
                           onChange={(e) => handleInputChange(i, e.target.value)}
@@ -209,13 +186,13 @@ function Form({ inputs, title, isLoading, validationEnabled }: IForm) {
                       </div>
                       <label
                         className={classes.formRadioOptionLabel}
-                        htmlFor={`option-${i}-${idx}`}
+                        htmlFor={`radio-${i}-${idx}`}
                       >
-                        {option}
+                        {option || "Option"}
                       </label>
                     </div>
                   ))}
-                  {errors[i] && (
+                  {showError && (
                     <p className={classes.invalidField}>{errors[i]}</p>
                   )}
                 </div>

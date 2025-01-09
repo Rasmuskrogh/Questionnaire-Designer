@@ -94,11 +94,11 @@
   background-color: white;
   cursor: pointer;
   transition: border-color 0.3s ease, background-color 0.3s ease;
-  z-index: 10;
+  /* z-index: 10; */
 }
 
 .radio:checked {
-  background-color: #0075ff;
+  background-color: var(--base-color-brand--gold);
   border: white solid 2px;
 }
 
@@ -109,6 +109,10 @@
 
 .radioLabel {
   cursor: pointer;
+}
+
+.checkbox {
+  accent-color: var(--base-color-brand--gold);
 }
 
 @media (width < 835px) {
