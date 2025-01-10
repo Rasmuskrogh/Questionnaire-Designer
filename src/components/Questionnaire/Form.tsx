@@ -42,12 +42,10 @@ function Form({ inputs, title, isLoading, validationEnabled }: IForm) {
     const newErrors: { [key: string]: string } = {};
 
     inputs.forEach((input, i) => {
-      // Datumvalidering
       if ("date" in input && !formInputs[i]?.input) {
         newErrors[i] = "Please choose a valid date";
       }
 
-      // Textinput-validering
       if (
         "input" in input &&
         typeof formInputs[i]?.input === "string" &&
@@ -56,7 +54,6 @@ function Form({ inputs, title, isLoading, validationEnabled }: IForm) {
         newErrors[i] = "This field is obligatory";
       }
 
-      // Checkbox-validering: ingen validering behövs
       if (
         "type" in input &&
         input.type === "checkbox" &&
@@ -65,7 +62,6 @@ function Form({ inputs, title, isLoading, validationEnabled }: IForm) {
         return;
       }
 
-      // Radioknapp-validering
       if ("type" in input && input.type === "radio") {
         if (!formInputs[i]?.input) {
           newErrors[i] = "Please choose one alternative";
@@ -83,26 +79,22 @@ function Form({ inputs, title, isLoading, validationEnabled }: IForm) {
 
     if (validationEnabled && validateForm()) {
       setErrors({});
-      // Handle form submission logic here
     }
   };
 
   const handleInputChange = (index: number, value: string | boolean) => {
     setFormInputs((prev) => {
       const newInputs = [...prev];
-      newInputs[index].input = value; // Update only the specific input
+      newInputs[index].input = value;
       return newInputs;
     });
   };
 
   useEffect(() => {
-    // Trigger validation only when actual form input changes, not when structure changes
     const formChanged = formInputs.some((input, index) => {
-      // Kolla om initialInputsState[index] har egenskapen 'input' innan vi försöker jämföra den
       if ("input" in input && "input" in initialInputsState[index]) {
         return input.input !== initialInputsState[index].input;
       }
-      // Om det inte är ett textfält, ignorera jämförelsen
       return false;
     });
 
@@ -135,9 +127,9 @@ function Form({ inputs, title, isLoading, validationEnabled }: IForm) {
           if (isTextInput(input)) {
             return { input: input.input || "" };
           } else if (isRadio(input) || isCheckbox(input)) {
-            return { input: "" }; // För radioknappar och checkboxar, sätt standardvärde
+            return { input: "" };
           } else if (isDateInput(input)) {
-            return { input: "" }; // För datumfält, sätt standardvärde
+            return { input: "" };
           }
           return { input: "" };
         })
@@ -238,7 +230,7 @@ function Form({ inputs, title, isLoading, validationEnabled }: IForm) {
                     {input.question}
                   </label>
                   {input.options?.map((option, idx) => {
-                    const optionValue = option || "Option"; // Använd "Option" som standardvärde
+                    const optionValue = option || "Option";
                     return (
                       <div key={idx} className={classes.formRadioOptionsDiv}>
                         <div className={classes.aligningRadioDiv}>
