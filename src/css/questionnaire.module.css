@@ -206,6 +206,10 @@
   }
 }
 
+.validationCheck {
+  accent-color: var(--base-color-brand--gold);
+}
+
 @media (width < 513px) {
   .addInputAndValidation {
     width: 100%;

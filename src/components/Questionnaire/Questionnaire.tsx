@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import classes from "../css/questionnaire.module.css";
-import Modal from "./Modal";
-import { InputType } from "../types";
+import classes from "../../css/questionnaire.module.css";
+import Modal from "../common/Modal";
+import { InputType } from "../../types";
 import Form from "./Form";
-import Button from "./Button";
-import { getPrefilledForm, saveForm } from "../request";
+import Button from "../common/Button";
+import { getPrefilledForm, saveForm } from "../../request";
 import TitleInput from "./TitleInput";
 import InputWrapper from "./InputWrapper";
-import SkeletonQuestionnaire from "../Skeletons/SkeletonQuestionnaire";
+import SkeletonQuestionnaire from "../../Skeletons/SkeletonQuestionnaire";
 
 function Questionnaire() {
   const [inputs, setInputs] = useState<InputType[]>([]);
@@ -192,6 +192,7 @@ function Questionnaire() {
             </button>
             <div className={classes.valdationCheck}>
               <input
+                className={classes.validationCheck}
                 type="checkbox"
                 id="validationCheck"
                 checked={validationEnabled}

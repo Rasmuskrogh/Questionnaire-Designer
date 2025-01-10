@@ -1,5 +1,5 @@
-import { InputFieldProps } from "../types";
-import classes from "../css/inputField.module.css";
+import { InputFieldProps } from "../../types";
+import classes from "../../css/inputField.module.css";
 
 function InputField({ input, index, onChange }: InputFieldProps) {
   const isDate = "date" in input;

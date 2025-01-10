@@ -1,8 +1,8 @@
-import classes from "../css/form.module.css";
-import { IForm } from "../interface";
-import SkeletonForm from "../Skeletons/SkeletonForm";
-import { InputType } from "../types";
-import Button from "./Button";
+import classes from "../../css/form.module.css";
+import { IForm } from "../../interface";
+import SkeletonForm from "../../Skeletons/SkeletonForm";
+import { InputType } from "../../types";
+import Button from "../common/Button";
 import { useEffect, useState } from "react";
 
 function Form({ inputs, title, isLoading, validationEnabled }: IForm) {
@@ -44,7 +44,7 @@ function Form({ inputs, title, isLoading, validationEnabled }: IForm) {
     inputs.forEach((input, i) => {
       // Datumvalidering
       if ("date" in input && !formInputs[i]?.input) {
-        newErrors[i] = "Vänligen välj ett giltigt datum.";
+        newErrors[i] = "Please choose a valid date";
       }
 
       // Textinput-validering
@@ -53,7 +53,7 @@ function Form({ inputs, title, isLoading, validationEnabled }: IForm) {
         typeof formInputs[i]?.input === "string" &&
         !formInputs[i]?.input.trim()
       ) {
-        newErrors[i] = "Detta fält är obligatoriskt.";
+        newErrors[i] = "This field is obligatory";
       }
 
       // Checkbox-validering: ingen validering behövs
@@ -68,7 +68,7 @@ function Form({ inputs, title, isLoading, validationEnabled }: IForm) {
       // Radioknapp-validering
       if ("type" in input && input.type === "radio") {
         if (!formInputs[i]?.input) {
-          newErrors[i] = "Vänligen välj ett radioknappsalternativ.";
+          newErrors[i] = "Please choose one alternative";
         }
       }
     });

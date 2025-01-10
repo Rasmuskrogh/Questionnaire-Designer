@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Button from "./components/Button";
+import Button from "./components/common/Button";
 import classes from "./css/app.module.css";
-import Questionnaire from "./components/Questionnaire";
+import Questionnaire from "./components/Questionnaire/Questionnaire";
 
 function App() {
   const [active, setActive] = useState<boolean>(true); //for testing

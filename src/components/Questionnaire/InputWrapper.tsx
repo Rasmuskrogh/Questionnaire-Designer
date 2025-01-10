@@ -1,10 +1,10 @@
 import React from "react";
-import { InputType } from "../types";
+import { InputType } from "../../types";
 import InputField from "./InputField";
-import classes from "../css/questionnaire.module.css";
-import { IInputWrapper } from "../interface";
-import Trashcan from "../assets/trash-2 (1).svg";
-import Plus from "../assets/plus (1).svg";
+import classes from "../../css/questionnaire.module.css";
+import { IInputWrapper } from "../../interface";
+import Trashcan from "../../assets/trash-2 (1).svg";
+import Plus from "../../assets/plus (1).svg";
 
 const InputWrapper: React.FC<IInputWrapper> = ({
   input,

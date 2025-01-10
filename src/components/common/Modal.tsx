@@ -1,10 +1,10 @@
-import { ModalProps } from "../types";
+import { ModalProps } from "../../types";
 import Button from "./Button";
 
-import classes from "../css/modal.module.css";
+import classes from "../../css/modal.module.css";
 import { useState } from "react";
-import CreateSelectableInputs from "./CreateSelectableInputs";
-import X from "../assets/x (4).svg";
+import CreateSelectableInputs from "../Questionnaire/CreateSelectableInputs";
+import X from "../../assets/x (4).svg";
 
 function Modal({
   onClose,
@@ -28,7 +28,7 @@ function Modal({
   const handleRadioClick = () => {
     setSelector("radio");
     openSelectableModal();
-  }
+  };
 
   return (
     <div className={classes.modal}>
@@ -65,10 +65,15 @@ function Modal({
       ) : (
         <div className={classes.modalContent}>
           <CreateSelectableInputs
-            selectablesType = {selector}
+            selectablesType={selector}
             closeSelectableModal={openSelectableModal}
-            addSelectableGroup={(selectablesData) => {{selector === "radio" ? (onAddRadio(selectablesData)) : (onAddCheckbox(selectablesData))}
-              
+            addSelectableGroup={(selectablesData) => {
+              {
+                selector === "radio"
+                  ? onAddRadio(selectablesData)
+                  : onAddCheckbox(selectablesData);
+              }
+
               setSelectableActive(false);
             }}
           />

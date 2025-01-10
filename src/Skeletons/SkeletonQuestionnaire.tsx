@@ -1,4 +1,4 @@
-import Button from "../components/Button";
+import Button from "../components/common/Button";
 import classes from "./skeleton.module.css";
 
 function SkeletonQuestionnaire() {

@@ -1,5 +1,5 @@
-import classes from "../css/questionnaire.module.css";
-import { ITitleInput } from "../interface";
+import classes from "../../css/questionnaire.module.css";
+import { ITitleInput } from "../../interface";
 
 function TitleInput({ title, setTitle }: ITitleInput) {
   return (

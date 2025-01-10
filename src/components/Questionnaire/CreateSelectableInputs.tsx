@@ -1,8 +1,8 @@
 import { useState } from "react";
-import classes from "../css/modal.module.css";
-import Button from "./Button";
-import { ISelectableSettings } from "../interface";
-import X from "../assets/x (4).svg";
+import classes from "../../css/modal.module.css";
+import Button from "../common/Button";
+import { ISelectableSettings } from "../../interface";
+import X from "../../assets/x (4).svg";
 
 const CreateSelectableInputs = ({
   closeSelectableModal,
