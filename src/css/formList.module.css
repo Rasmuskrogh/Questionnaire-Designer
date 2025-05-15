@@ -44,13 +44,17 @@
 .backButton {
   margin-top: 2rem;
   align-self: center;
-  padding: 1rem 1.5rem;
+  padding: 1.25rem 1.95rem;
   background-color: var(--base-color-brand--gold);
   color: var(--secondary-text-color);
   text-decoration: none;
   border-radius: 0.813rem;
-  font-weight: bold;
+  font-weight: 400;
+  font-family: "Alata", serif;
   text-transform: uppercase;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
 }
 
 .backButton:hover {

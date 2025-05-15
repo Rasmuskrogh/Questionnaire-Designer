@@ -1,12 +1,10 @@
 import { createClient } from "@supabase/supabase-js";
 import { InputType } from "./types";
 
-// Supabase konfiguration
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-// Default-formulär som motsvarar det från db.json
 const defaultForm = {
   title: "Default Form",
   inputs: [
@@ -59,7 +57,6 @@ export const saveForm = async (form: {
 
 export const getPrefilledForm = async () => {
   try {
-    // Hämta det senaste formuläret
     const { data, error } = await supabase
       .from("forms")
       .select("*")
@@ -68,29 +65,25 @@ export const getPrefilledForm = async () => {
       .single();
 
     if (error) {
-      // Om inget formulär finns, använd default
       if (error.code === "PGRST116") {
         console.log("No forms found, using default form");
         return defaultForm;
       }
       console.error("Supabase error:", error);
-      return defaultForm; // Returnera defaultForm vid alla fel istället för att kasta vidare
+      return defaultForm;
     }
 
     console.log("Form loaded from Supabase:", data.id);
-    // Konvertera till det format Questionnaire förväntar sig
     return {
       title: data.title,
       inputs: data.fields || [],
     };
   } catch (error) {
     console.error("Error fetching form data", error);
-    // Returnera default-formuläret om något går fel
     return defaultForm;
   }
 };
 
-// Funktion som bara returnerar default-formuläret (utan databasanrop)
 export const getDefaultForm = () => {
   return { ...defaultForm };
 };

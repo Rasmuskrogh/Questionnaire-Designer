@@ -9,20 +9,18 @@ interface SuccessPageProps {
 const SuccessPage = ({ resetActive }: SuccessPageProps) => {
   const navigate = useNavigate();
 
-  // Använd useCallback för att memoize funktionen
   const goBackToHome = useCallback(() => {
     resetActive();
     navigate("/");
   }, [resetActive, navigate]);
 
-  // Auto-redirect efter 3 sekunder
   useEffect(() => {
     const timer = setTimeout(() => {
       goBackToHome();
     }, 3000);
 
     return () => clearTimeout(timer);
-  }, [goBackToHome]); // Nu är det säkert att ha goBackToHome i dependency array
+  }, [goBackToHome]);
 
   return (
     <div className={classes.successContainer}>
