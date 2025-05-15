@@ -4,18 +4,17 @@ import Button from "./components/common/Button";
 import classes from "./css/app.module.css";
 import Questionnaire from "./components/Questionnaire/Questionnaire";
 import SuccessPage from "./components/SuccessPage";
+import FormsListPage from "./components/FormListPage";
 import { getDefaultForm } from "./request";
 import { DefaultForm } from "./interface";
 
 function App() {
   const [active, setActive] = useState<boolean>(true);
-  // State för att hålla default-formuläret
   const [defaultFormData, setDefaultFormData] = useState<DefaultForm | null>(
     null
   );
 
   const handleVisibility = () => {
-    // När "Start Creating" klickas, sätt default-form data
     if (active) {
       const defaultForm = getDefaultForm();
       setDefaultFormData(defaultForm as DefaultForm);
@@ -25,7 +24,6 @@ function App() {
 
   const resetActive = () => {
     setActive(true);
-    // Återställ även defaultFormData om du vill återställa formuläret
     setDefaultFormData(null);
   };
 
@@ -42,7 +40,14 @@ function App() {
                   <p>
                     Create a form to share with your team or backend system!
                   </p>
-                  <Button label="Start Creating" onClick={handleVisibility} />
+                  <div className={classes.homeButtons}>
+                    <Button label="Start Building" onClick={handleVisibility} />
+                    <Button
+                      label="View Saved Forms"
+                      onClick={() => (window.location.href = "/forms-list")}
+                      className={classes.secondaryButton}
+                    />
+                  </div>
                 </div>
               ) : (
                 <div className={classes.postButtonClickDiv}>
@@ -56,6 +61,7 @@ function App() {
           path="/success"
           element={<SuccessPage resetActive={resetActive} />}
         />
+        <Route path="/forms-list" element={<FormsListPage />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>

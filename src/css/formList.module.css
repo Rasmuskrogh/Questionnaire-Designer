@@ -1,0 +1,99 @@
+.formsListContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 2rem;
+  animation: fadeIn 2s;
+}
+
+.formsListContainer h1 {
+  color: var(--base-color-brand--gold);
+  margin-bottom: 2rem;
+}
+
+.formsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.formCard {
+  background-color: var(--primary-element-color-grey);
+  padding: 1.5rem;
+  border-radius: 0.8rem;
+  transition: transform 0.2s;
+}
+
+.formCard:hover {
+  transform: translateY(-5px);
+}
+
+.formCard h2 {
+  color: var(--base-color-brand--gold);
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+}
+
+.formDate {
+  color: var(--primary-text-color);
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.backButton {
+  margin-top: 2rem;
+  align-self: center;
+  padding: 1rem 1.5rem;
+  background-color: var(--base-color-brand--gold);
+  color: var(--secondary-text-color);
+  text-decoration: none;
+  border-radius: 0.813rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.backButton:hover {
+  background-color: #be831c;
+}
+
+.loading {
+  color: var(--primary-text-color);
+  font-size: 1.2rem;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.error {
+  color: crimson;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.emptyState {
+  color: var(--primary-text-color);
+  text-align: center;
+  margin: 2rem 0;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media (width < 470px) {
+  .formsListContainer {
+    padding: 1rem;
+  }
+
+  .formsGrid {
+    grid-template-columns: 1fr;
+  }
+}

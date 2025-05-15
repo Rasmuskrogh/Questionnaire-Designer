@@ -94,3 +94,17 @@ export const getPrefilledForm = async () => {
 export const getDefaultForm = () => {
   return { ...defaultForm };
 };
+export const getAllForms = async () => {
+  try {
+    const { data, error } = await supabase
+      .from("forms")
+      .select("id, title, created_at")
+      .order("created_at", { ascending: false });
+
+    if (error) throw error;
+    return data || [];
+  } catch (error) {
+    console.error("Error fetching forms", error);
+    throw error;
+  }
+};

@@ -41,3 +41,29 @@ p {
     font-size: 0.9rem;
   }
 }
+
+.homeButtons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem; /* Mellanrum mellan knapparna */
+  margin-top: 1rem;
+}
+
+.secondaryButton {
+  background-color: var(
+    --base-color-brand--gold
+  ); /* Samma färg som standardknappen */
+}
+
+.secondaryButton:hover {
+  background: #be831c; /* Samma hover-effekt som standardknappen */
+}
+
+/* Responsivt beteende för mindre skärmar */
+@media (width < 600px) {
+  .homeButtons {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+}
