@@ -8,14 +8,16 @@ import { getPrefilledForm, saveForm } from "../../request";
 import TitleInput from "./TitleInput";
 import InputWrapper from "./InputWrapper";
 import SkeletonQuestionnaire from "../../Skeletons/SkeletonQuestionnaire";
+import { useNavigate } from "react-router-dom";
+import { IQuestionnaireProps } from "../../interface";
 
-function Questionnaire() {
+function Questionnaire({ defaultForm = null }: IQuestionnaireProps) {
   const [inputs, setInputs] = useState<InputType[]>([]);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [validationEnabled, setValidationEnabled] = useState<boolean>(false);
-
+  const navigate = useNavigate();
   const handleAddInput = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setInputs([...inputs, { label: "", input: "" }]);
@@ -135,6 +137,7 @@ function Questionnaire() {
       }
       const result = await saveForm(formData);
       console.log("form saved successfully", result);
+      navigate("/success");
     } catch (error) {
       console.error("save form unsuccessful ", error);
     }
@@ -149,9 +152,14 @@ function Questionnaire() {
   useEffect(() => {
     const fetchPrefilledForm = async () => {
       try {
-        const formData = await getPrefilledForm();
-        setTitle(formData.title);
-        setInputs(formData.inputs);
+        if (defaultForm) {
+          setTitle(defaultForm.title);
+          setInputs(defaultForm.inputs);
+        } else {
+          const formData = await getPrefilledForm();
+          setTitle(formData.title);
+          setInputs(formData.inputs);
+        }
       } catch (error) {
         console.error("Error loading initial form data", error);
       } finally {
@@ -159,7 +167,7 @@ function Questionnaire() {
       }
     };
     fetchPrefilledForm();
-  }, []);
+  }, [defaultForm]);
 
   return (
     <div className={classes.questionnaireWrappingDiv}>

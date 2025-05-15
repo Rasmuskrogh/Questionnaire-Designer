@@ -68,10 +68,10 @@ function Modal({
             selectablesType={selector}
             closeSelectableModal={openSelectableModal}
             addSelectableGroup={(selectablesData) => {
-              {
-                selector === "radio"
-                  ? onAddRadio(selectablesData)
-                  : onAddCheckbox(selectablesData);
+              if (selector === "radio") {
+                onAddRadio(selectablesData);
+              } else {
+                onAddCheckbox(selectablesData);
               }
 
               setSelectableActive(false);

@@ -50,3 +50,12 @@ export interface IInputWrapper {
     e: React.MouseEvent<HTMLButtonElement>
   ) => void;
 }
+
+export interface IQuestionnaireProps {
+  defaultForm?: { title: string; inputs: InputType[] } | null;
+}
+
+export interface DefaultForm {
+  title: string;
+  inputs: InputType[];
+}

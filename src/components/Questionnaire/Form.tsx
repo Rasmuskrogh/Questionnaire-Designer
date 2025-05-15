@@ -3,7 +3,7 @@ import { IForm } from "../../interface";
 import SkeletonForm from "../../Skeletons/SkeletonForm";
 import { InputType } from "../../types";
 import Button from "../common/Button";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 function Form({ inputs, title, isLoading, validationEnabled }: IForm) {
   const [formInputs, setFormInputs] = useState<{ input: string | boolean }[]>(
@@ -36,7 +36,7 @@ function Form({ inputs, title, isLoading, validationEnabled }: IForm) {
     return (input as { date: string }).date !== undefined;
   };
 
-  const validateForm = () => {
+  const validateForm = useCallback(() => {
     if (!validationEnabled) return true;
 
     const newErrors: { [key: string]: string } = {};
@@ -71,7 +71,7 @@ function Form({ inputs, title, isLoading, validationEnabled }: IForm) {
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  };
+  }, [validationEnabled, inputs, formInputs]);
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -101,7 +101,7 @@ function Form({ inputs, title, isLoading, validationEnabled }: IForm) {
     if (formChanged && validationEnabled) {
       validateForm();
     }
-  }, [formInputs, validationEnabled, initialInputsState]);
+  }, [formInputs, validationEnabled, initialInputsState, validateForm]);
 
   useEffect(() => {
     const shouldUpdateState =
@@ -135,7 +135,7 @@ function Form({ inputs, title, isLoading, validationEnabled }: IForm) {
         })
       );
     }
-  }, [inputs]);
+  }, [inputs, initialInputsState]);
 
   return (
     <div className={classes.form}>
